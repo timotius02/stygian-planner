@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, UserCheck, Filter, Sparkles, X } from 'lucide-react';
+import { Search, UserCheck, Filter, Sparkles, X, Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useTeamStore } from '@/store/teamStore';
 import { cn } from '@/lib/utils';
 import type { ElementType, OwnedCharacter } from '@/types';
+import { AddCharacterModal } from './AddCharacterModal';
 
 interface CharacterSelectorModalProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ export function CharacterSelectorModal({
   onSelect,
 }: CharacterSelectorModalProps) {
   const { ownedCharacters, isCharacterAssigned } = useTeamStore();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedElement, setSelectedElement] = useState<ElementType | null>(null);
 
@@ -67,28 +69,37 @@ export function CharacterSelectorModal({
     setSelectedElement(null);
   };
 
+  const handleAddCharacter = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col bg-[hsl(260_25%_8%)] border border-white/10 text-slate-100 shadow-2xl p-0 gap-0">
-        {/* Header */}
-        <DialogHeader className="p-6 pb-4 border-b border-white/10 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-xl font-bold text-gradient-mystic flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-violet-500/30 rounded-xl blur-md" />
-                <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-800/30 flex items-center justify-center border border-violet-500/40">
-                  <UserCheck className="w-6 h-6 text-violet-400" />
+    <>
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col bg-[hsl(260_25%_8%)] border border-white/10 text-slate-100 shadow-2xl p-0 gap-0">
+          {/* Header */}
+          <DialogHeader className="p-6 pb-4 border-b border-white/10 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-xl font-bold text-gradient-mystic flex items-center gap-3">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-violet-500/30 rounded-xl blur-md" />
+                  <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-800/30 flex items-center justify-center border border-violet-500/40">
+                    <UserCheck className="w-6 h-6 text-violet-400" />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <span className="block">Select Character</span>
-                <span className="text-xs font-normal text-slate-400">
-                  {ownedCharacters.length} characters available
-                </span>
-              </div>
-            </DialogTitle>
-          </div>
-        </DialogHeader>
+                <div>
+                  <span className="block">Select Character</span>
+                  <span className="text-xs font-normal text-slate-400">
+                    {ownedCharacters.length} characters available
+                  </span>
+                </div>
+              </DialogTitle>
+            </div>
+          </DialogHeader>
 
         {/* Search and Filter */}
         <div className="p-6 pb-4 space-y-5 border-b border-white/5">
@@ -210,23 +221,40 @@ export function CharacterSelectorModal({
           )}
         </div>
 
-        {/* Footer Stats */}
-        <div className="p-4 border-t border-white/10 bg-slate-900/50 flex items-center justify-between text-sm">
-          <span className="text-slate-500">
-            Showing <span className="text-slate-300 font-medium">{filteredCharacters.length}</span> of{' '}
-            <span className="text-slate-300 font-medium">{ownedCharacters.length}</span> characters
-          </span>
-          {selectedElement && (
-            <button
-              onClick={() => setSelectedElement(null)}
-              className="text-violet-400 hover:text-violet-300 transition-colors text-sm font-medium"
-            >
-              Clear filter
-            </button>
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+          {/* Footer Stats */}
+          <div className="p-4 border-t border-white/10 bg-slate-900/50 flex items-center justify-between text-sm">
+            <span className="text-slate-500">
+              Showing <span className="text-slate-300 font-medium">{filteredCharacters.length}</span> of{' '}
+              <span className="text-slate-300 font-medium">{ownedCharacters.length}</span> characters
+            </span>
+            <div className="flex items-center gap-3">
+              {selectedElement && (
+                <button
+                  onClick={() => setSelectedElement(null)}
+                  className="text-violet-400 hover:text-violet-300 transition-colors text-sm font-medium"
+                >
+                  Clear filter
+                </button>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleAddCharacter}
+                className="border-violet-500/30 text-violet-400 hover:bg-violet-500/10"
+              >
+                <Plus className="w-4 h-4 mr-1.5" />
+                Add Character
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <AddCharacterModal
+        isOpen={isAddModalOpen}
+        onClose={handleCloseAddModal}
+      />
+    </>
   );
 }
 

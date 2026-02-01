@@ -20,7 +20,7 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
   const {
     getBattlefieldTeam,
     assignCharacter,
-    removeCharacter,
+    removeCharacterFromSlot,
     ownedCharacters,
   } = useTeamStore();
 
@@ -43,7 +43,7 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
   };
 
   const handleRemoveCharacter = (position: number) => {
-    removeCharacter(battlefieldId, position);
+    removeCharacterFromSlot(battlefieldId, position);
   };
 
   const filledSlots = team?.slots.filter(s => s.characterId).length || 0;

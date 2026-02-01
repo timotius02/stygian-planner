@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Search, Loader2, AlertCircle, CheckCircle2, Users, Sparkles, RefreshCw, Shield, Zap } from 'lucide-react';
+import { Search, Loader2, AlertCircle, CheckCircle2, Users, Sparkles, RefreshCw, Shield, Zap, Plus, Pencil, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useEnkaQuery } from '@/hooks/useEnkaQuery';
 import { useTeamStore } from '@/store/teamStore';
 import { enkaApiService } from '@/services/enkaApi';
 import { cn } from '@/lib/utils';
-import type { ElementType } from '@/types';
+import type { ElementType, OwnedCharacter } from '@/types';
+import { AddCharacterModal } from '@/components/character/AddCharacterModal';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 const elementBorderColors: Record<ElementType, string> = {
   pyro: 'border-red-400/70 shadow-red-500/30',
@@ -35,7 +42,10 @@ export function UIDInputSection() {
   const [fetchEnabled, setFetchEnabled] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [refreshError, setRefreshError] = useState<string | null>(null);
-  const { setUID, setOwnedCharacters, currentUID, ownedCharacters, lastFetched, refreshCharacters } = useTeamStore();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingCharacter, setEditingCharacter] = useState<OwnedCharacter | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { setUID, setOwnedCharacters, currentUID, ownedCharacters, lastFetched, refreshCharacters, removeCharacter } = useTeamStore();
 
   const { data, isLoading, isError, error } = useEnkaQuery(
     fetchEnabled ? uid : null
@@ -261,50 +271,103 @@ export function UIDInputSection() {
                   Your Characters
                 </h3>
               </div>
-              <span className="text-xs text-slate-500 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">
-                {ownedCharacters.length} total
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-slate-500 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">
+                  {ownedCharacters.length} total
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsAddModalOpen(true)}
+                  className="h-8 px-3 text-xs border-violet-500/30 text-violet-400 hover:bg-violet-500/10 hover:text-violet-300"
+                >
+                  <Plus className="w-3.5 h-3.5 mr-1.5" />
+                  Add
+                </Button>
+              </div>
             </div>
 
             {/* Character Grid */}
             <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
-              {ownedCharacters.map((character, index) => (
-                <div
-                  key={character.id}
-                  className="flex flex-col items-center gap-1.5 group animate-scale-in"
-                  style={{ animationDelay: `${index * 30}ms` }}
-                >
+              {ownedCharacters.map((character, index) => {
+                return (
                   <div
-                    className={cn(
-                      'w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-lg',
-                      elementBorderColors[character.element],
-                      'group-hover:scale-110 group-hover:shadow-xl'
-                    )}
+                    key={character.id}
+                    className="flex flex-col items-center gap-1.5 group animate-scale-in relative"
+                    style={{ animationDelay: `${index * 30}ms` }}
                   >
-                    <img
-                      src={character.iconUrl}
-                      alt={character.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = 'flex';
-                        }
-                      }}
-                    />
+                    {/* Character Icon */}
                     <div
-                      className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-sm hidden"
+                      className={cn(
+                        'w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-lg relative',
+                        elementBorderColors[character.element],
+                        'group-hover:scale-110 group-hover:shadow-xl'
+                      )}
                     >
-                      {character.name.charAt(0)}
+                      <img
+                        src={character.iconUrl}
+                        alt={character.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
+                          if (fallback) {
+                            fallback.style.display = 'flex';
+                          }
+                        }}
+                      />
+                      <div
+                        className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-sm hidden"
+                      >
+                        {character.name.charAt(0)}
+                      </div>
+
+                      {/* Hover Actions - All characters are editable and removable */}
+                      <div className="absolute inset-0 bg-slate-900/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-1">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingCharacter(character);
+                            setIsEditModalOpen(true);
+                          }}
+                          className="w-6 h-6 rounded-full bg-violet-500/80 hover:bg-violet-500 flex items-center justify-center text-white transition-colors"
+                          title="Edit character"
+                        >
+                          <Pencil className="w-3 h-3" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeCharacter(character.id);
+                          }}
+                          className="w-6 h-6 rounded-full bg-rose-500/80 hover:bg-rose-500 flex items-center justify-center text-white transition-colors"
+                          title="Remove character"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Character Name */}
+                    <span className="text-[10px] text-slate-500 truncate w-full text-center group-hover:text-slate-300 transition-colors">
+                      {character.name}
+                    </span>
+
+                    {/* Level & Constellation */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-[9px] text-slate-600">
+                        Lv.{character.level}
+                      </span>
+                      {character.constellation > 0 && (
+                        <span className="text-[9px] text-amber-400">
+                          C{character.constellation}
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <span className="text-[10px] text-slate-500 truncate w-full text-center group-hover:text-slate-300 transition-colors">
-                    {character.name}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Element Filter Visualization */}
@@ -340,6 +403,136 @@ export function UIDInputSection() {
           </div>
         )}
       </div>
+
+      {/* Add Character Modal */}
+      <AddCharacterModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
+
+      {/* Edit Character Modal */}
+      <EditCharacterModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingCharacter(null);
+        }}
+        character={editingCharacter}
+      />
     </div>
+  );
+}
+
+// Edit Character Modal Component
+interface EditCharacterModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  character: OwnedCharacter | null;
+}
+
+function EditCharacterModal({ isOpen, onClose, character }: EditCharacterModalProps) {
+  const { updateCharacter } = useTeamStore();
+  const [level, setLevel] = useState(90);
+  const [constellation, setConstellation] = useState(0);
+
+  // Initialize form values when character changes
+  const characterRef = character;
+  if (characterRef && (level !== characterRef.level || constellation !== characterRef.constellation)) {
+    // Only update if values are different to avoid infinite loop
+    if (level === 90 && constellation === 0) {
+      setLevel(characterRef.level);
+      setConstellation(characterRef.constellation);
+    }
+  }
+
+  const handleSave = () => {
+    if (!character) return;
+    updateCharacter(character.id, {
+      level,
+      constellation,
+    });
+    onClose();
+  };
+
+  if (!character) return null;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-md bg-[hsl(260_25%_8%)] border border-white/10 text-slate-100">
+        <DialogHeader>
+          <DialogTitle className="text-lg font-bold text-gradient-mystic flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-violet-600/20 flex items-center justify-center border border-violet-500/40">
+              <Pencil className="w-5 h-5 text-violet-400" />
+            </div>
+            Edit Character
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-6 py-4">
+          {/* Character Info */}
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
+            <div
+              className={cn(
+                'w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg',
+                elementBorderColors[character.element]
+              )}
+            >
+              <img
+                src={character.iconUrl}
+                alt={character.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <p className="font-semibold text-slate-200">{character.name}</p>
+            </div>
+          </div>
+
+          {/* Level and Constellation Inputs */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-300">Level</label>
+              <Input
+                type="number"
+                min={1}
+                max={90}
+                value={level}
+                onChange={(e) => setLevel(Math.min(90, Math.max(1, parseInt(e.target.value) || 1)))}
+                className="input-genshin h-12 text-base"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-300">Constellation</label>
+              <Input
+                type="number"
+                min={0}
+                max={6}
+                value={constellation}
+                onChange={(e) => setConstellation(Math.min(6, Math.max(0, parseInt(e.target.value) || 0)))}
+                className="input-genshin h-12 text-base"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSave}
+            className="btn-genshin"
+          >
+            <Pencil className="w-4 h-4 mr-2" />
+            Save Changes
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

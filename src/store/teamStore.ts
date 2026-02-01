@@ -5,7 +5,7 @@ import type { OwnedCharacter, TeamSlot, BattlefieldTeam } from '@/types';
 interface TeamState {
   // State
   currentUID: string | null;
-  ownedCharacters: OwnedCharacter[];
+  ownedCharacters: OwnedCharacter[]; // Unified character storage
   lastFetched: number | null; // timestamp of last character fetch
   teams: Record<string, BattlefieldTeam>; // keyed by battlefieldId
 
@@ -13,12 +13,15 @@ interface TeamState {
   setUID: (uid: string) => void;
   setOwnedCharacters: (characters: OwnedCharacter[]) => void;
   refreshCharacters: () => Promise<void>;
+  addCharacter: (character: OwnedCharacter) => void;
+  removeCharacter: (characterId: string) => void;
+  updateCharacter: (characterId: string, updates: Partial<OwnedCharacter>) => void;
   assignCharacter: (
     battlefieldId: string,
     slotPosition: number,
     characterId: string
   ) => void;
-  removeCharacter: (battlefieldId: string, slotPosition: number) => void;
+  removeCharacterFromSlot: (battlefieldId: string, slotPosition: number) => void;
   clearBattlefieldTeam: (battlefieldId: string) => void;
   clearAllTeams: () => void;
   getBattlefieldTeam: (battlefieldId: string) => BattlefieldTeam | undefined;
@@ -45,21 +48,72 @@ export const useTeamStore = create<TeamState>()(
       setUID: (uid: string) => set({ currentUID: uid }),
 
       setOwnedCharacters: (characters: OwnedCharacter[]) =>
-        set({ ownedCharacters: characters, lastFetched: Date.now() }),
+        set({
+          ownedCharacters: characters,
+          lastFetched: Date.now(),
+        }),
 
       refreshCharacters: async () => {
-        const { currentUID } = get();
+        const { currentUID, ownedCharacters } = get();
         if (!currentUID) {
           throw new Error('No UID set. Please enter your UID first.');
         }
         // Import dynamically to avoid circular dependency
         const { enkaApiService } = await import('@/services/enkaApi');
         const data = await enkaApiService.fetchPlayerData(currentUID);
-        const characters = enkaApiService.transformToOwnedCharacters(
+        const apiCharacters = enkaApiService.transformToOwnedCharacters(
           data.avatarInfoList
         );
-        set({ ownedCharacters: characters, lastFetched: Date.now() });
+
+        // Update existing characters or add new ones from API
+        const updatedCharacters = [...ownedCharacters];
+
+        for (const apiChar of apiCharacters) {
+          const existingIndex = updatedCharacters.findIndex(c => c.id === apiChar.id);
+          if (existingIndex >= 0) {
+            // Update existing character with API data
+            updatedCharacters[existingIndex] = apiChar;
+          } else {
+            // Add new character from API
+            updatedCharacters.push(apiChar);
+          }
+        }
+
+        set({
+          ownedCharacters: updatedCharacters,
+          lastFetched: Date.now()
+        });
       },
+
+      addCharacter: (character: OwnedCharacter) =>
+        set((state) => {
+          // Check if character already exists
+          const exists = state.ownedCharacters.some((c) => c.id === character.id);
+          if (exists) {
+            // Update existing character
+            return {
+              ownedCharacters: state.ownedCharacters.map((c) =>
+                c.id === character.id ? character : c
+              ),
+            };
+          }
+          // Add new character
+          return {
+            ownedCharacters: [...state.ownedCharacters, character],
+          };
+        }),
+
+      removeCharacter: (characterId: string) =>
+        set((state) => ({
+          ownedCharacters: state.ownedCharacters.filter((c) => c.id !== characterId),
+        })),
+
+      updateCharacter: (characterId: string, updates: Partial<OwnedCharacter>) =>
+        set((state) => ({
+          ownedCharacters: state.ownedCharacters.map((c) =>
+            c.id === characterId ? { ...c, ...updates } : c
+          ),
+        })),
 
       assignCharacter: (
         battlefieldId: string,
@@ -89,7 +143,7 @@ export const useTeamStore = create<TeamState>()(
           };
         }),
 
-      removeCharacter: (battlefieldId: string, slotPosition: number) =>
+      removeCharacterFromSlot: (battlefieldId: string, slotPosition: number) =>
         set((state) => {
           const existingTeam = state.teams[battlefieldId];
           if (!existingTeam) return state;
@@ -113,7 +167,8 @@ export const useTeamStore = create<TeamState>()(
 
       clearBattlefieldTeam: (battlefieldId: string) =>
         set((state) => {
-          const { [battlefieldId]: _, ...remainingTeams } = state.teams;
+          const { [battlefieldId]: removed, ...remainingTeams } = state.teams;
+          void removed; // Explicitly mark as intentionally unused
           return { teams: remainingTeams };
         }),
 
