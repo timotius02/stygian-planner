@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Genshin Impact Inspired Dark Theme */
+    --background: 260 30% 8%;
+    --foreground: 260 20% 95%;
+    --card: 260 25% 12%;
+    --card-foreground: 260 20% 95%;
+    --popover: 260 25% 10%;
+    --popover-foreground: 260 20% 95%;
+    --primary: 265 60% 55%;
+    --primary-foreground: 260 20% 98%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 20% 95%;
+    --muted: 260 20% 20%;
+    --muted-foreground: 260 15% 60%;
+    --accent: 45 90% 55%;
+    --accent-foreground: 260 30% 10%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 260 20% 20%;
+    --input: 260 20% 18%;
+    --ring: 265 60% 55%;
+    --chart-1: 265 60% 55%;
+    --chart-2: 45 90% 55%;
+    --chart-3: 280 50% 45%;
+    --chart-4: 190 70% 50%;
+    --chart-5: 0 70% 50%;
+    --radius: 0.75rem;
+
+    /* Genshin Element Colors */
+    --element-pyro: 15 85% 55%;
+    --element-hydro: 210 85% 55%;
+    --element-electro: 270 70% 60%;
+    --element-cryo: 190 80% 65%;
+    --element-dendro: 120 60% 45%;
+    --element-anemo: 170 70% 55%;
+    --element-geo: 45 80% 55%;
+
+    /* Genshin Gold Accent */
+    --genshin-gold: 45 90% 55%;
+    --genshin-gold-light: 45 95% 65%;
+    --genshin-gold-dark: 45 80% 45%;
+
+    /* Dark Fantasy Theme */
+    --stygian-purple: 260 40% 15%;
+    --stygian-purple-light: 265 35% 25%;
+    --stygian-purple-dark: 260 45% 8%;
+    --void-black: 260 30% 5%;
+    --ethereal-blue: 220 60% 60%;
+    --mystic-violet: 270 50% 55%;
+  }
+
+  .dark {
+    --background: 260 30% 8%;
+    --foreground: 260 20% 95%;
+    --card: 260 25% 12%;
+    --card-foreground: 260 20% 95%;
+    --popover: 260 25% 10%;
+    --popover-foreground: 260 20% 95%;
+    --primary: 265 60% 55%;
+    --primary-foreground: 260 20% 98%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 20% 95%;
+    --muted: 260 20% 20%;
+    --muted-foreground: 260 15% 60%;
+    --accent: 45 90% 55%;
+    --accent-foreground: 260 30% 10%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 260 20% 20%;
+    --input: 260 20% 18%;
+    --ring: 265 60% 55%;
+    --chart-1: 265 60% 55%;
+    --chart-2: 45 90% 55%;
+    --chart-3: 280 50% 45%;
+    --chart-4: 190 70% 50%;
+    --chart-5: 0 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, hsl(260 40% 6%) 0%, hsl(260 35% 10%) 50%, hsl(270 30% 12%) 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer components {
+  /* Genshin-inspired Card Styles */
+  .genshin-card {
+    @apply relative overflow-hidden rounded-xl border border-white/10;
+    background: linear-gradient(145deg, hsl(260 25% 14%) 0%, hsl(260 30% 10%) 100%);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .genshin-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  }
+
+  /* Gold Accent Border */
+  .gold-border {
+    border: 1px solid hsl(45 90% 55% / 0.3);
+    box-shadow:
+      0 0 0 1px hsl(45 90% 55% / 0.1),
+      inset 0 0 20px hsl(45 90% 55% / 0.05);
+  }
+
+  /* Mystic Glow Effect */
+  .mystic-glow {
+    box-shadow:
+      0 0 20px hsl(265 60% 55% / 0.3),
+      0 0 40px hsl(265 60% 55% / 0.1);
+  }
+
+  /* Boss Avatar Ring */
+  .boss-avatar-ring {
+    background: linear-gradient(145deg, hsl(265 60% 50%), hsl(280 50% 40%));
+    padding: 3px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 15px hsl(265 60% 50% / 0.4),
+      0 0 30px hsl(265 60% 50% / 0.2),
+      inset 0 0 10px hsl(265 60% 50% / 0.2);
+  }
+
+  /* Element Color Borders */
+  .element-border-pyro { border-color: hsl(15 85% 55%); }
+  .element-border-hydro { border-color: hsl(210 85% 55%); }
+  .element-border-electro { border-color: hsl(270 70% 60%); }
+  .element-border-cryo { border-color: hsl(190 80% 65%); }
+  .element-border-dendro { border-color: hsl(120 60% 45%); }
+  .element-border-anemo { border-color: hsl(170 70% 55%); }
+  .element-border-geo { border-color: hsl(45 80% 55%); }
+
+  /* Empty Slot Style */
+  .empty-slot {
+    @apply rounded-full border-2 border-dashed border-white/20 bg-white/5;
+    transition: all 0.2s ease;
+  }
+
+  .empty-slot:hover {
+    border-color: hsl(265 60% 55% / 0.5);
+    background: hsl(265 60% 55% / 0.1);
+  }
+
+  /* Damage Type Badges */
+  .badge-recommended {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background: linear-gradient(145deg, hsl(150 60% 20%), hsl(150 50% 15%));
+    border: 1px solid hsl(150 60% 40% / 0.4);
+    color: hsl(150 70% 65%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .badge-discouraged {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background: linear-gradient(145deg, hsl(0 60% 20%), hsl(0 50% 15%));
+    border: 1px solid hsl(0 60% 40% / 0.4);
+    color: hsl(0 70% 65%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Button Styles */
+  .btn-genshin {
+    @apply relative overflow-hidden rounded-lg font-medium transition-all duration-200;
+    background: linear-gradient(145deg, hsl(265 60% 50%), hsl(265 50% 45%));
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 0 0 1px hsl(265 60% 60% / 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-genshin:hover {
+    background: linear-gradient(145deg, hsl(265 60% 55%), hsl(265 50% 50%));
+    box-shadow:
+      0 6px 8px -1px rgba(0, 0, 0, 0.3),
+      0 0 0 1px hsl(265 60% 60% / 0.4),
+      0 0 20px hsl(265 60% 50% / 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .btn-genshin:active {
+    transform: translateY(0);
+    box-shadow:
+      0 2px 4px -1px rgba(0, 0, 0, 0.3),
+      0 0 0 1px hsl(265 60% 60% / 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Input Styles */
+  .input-genshin {
+    @apply rounded-lg border bg-white/5 px-4 py-2.5 text-sm transition-all duration-200;
+    border-color: hsl(260 20% 25%);
+    color: hsl(260 20% 95%);
+  }
+
+  .input-genshin:focus {
+    outline: none;
+    border-color: hsl(265 60% 55%);
+    box-shadow: 0 0 0 3px hsl(265 60% 55% / 0.15);
+    background: hsl(260 25% 12%);
+  }
+
+  .input-genshin::placeholder {
+    color: hsl(260 15% 45%);
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    background: linear-gradient(135deg, hsl(260 40% 6% / 0.95) 0%, hsl(260 35% 10% / 0.95) 100%);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(260 30% 8%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(260 20% 25%);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(265 40% 40%);
+  }
+
+  /* Text Gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(45 95% 65%) 0%, hsl(45 80% 50%) 50%, hsl(35 85% 55%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-mystic {
+    background: linear-gradient(135deg, hsl(265 70% 70%) 0%, hsl(280 60% 60%) 50%, hsl(265 50% 55%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(265 60% 55% / 0.3); }
+  50% { box-shadow: 0 0 30px hsl(265 60% 55% / 0.5); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
