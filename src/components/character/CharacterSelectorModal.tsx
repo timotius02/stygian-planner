@@ -310,7 +310,7 @@ function CharacterGridItem({
 
         {/* Fallback */}
         <div
-          className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-lg hidden"
+          className="character-fallback w-full h-full items-center justify-center bg-slate-800 text-slate-400 font-bold text-lg hidden"
         >
           {character.name.charAt(0)}
         </div>
