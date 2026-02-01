@@ -2,7 +2,7 @@
 
 A beautiful, Genshin Impact-themed team planner for the Stygian Onslaught game mode. Import your characters from Enka Network and strategically plan your team compositions for each battlefield.
 
-![Stygian Onslaught Planner](./screenshots/team-customization.png)
+![Stygian Onslaught Planner](./screenshots/app-preview.png)
 
 ## ✨ Features
 
