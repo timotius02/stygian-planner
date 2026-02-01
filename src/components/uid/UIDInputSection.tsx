@@ -259,149 +259,153 @@ export function UIDInputSection() {
         )}
 
         {/* Characters Grid by Element */}
-        {ownedCharacters.length > 0 && (
-          <div className="mt-2 space-y-6">
-            {/* Section Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-slate-800/80 flex items-center justify-center border border-slate-700">
-                  <Zap className="w-4 h-4 text-amber-400" />
-                </div>
-                <h3 className="text-sm font-semibold text-slate-300">
-                  Your Characters
-                </h3>
+        <div className="mt-2 space-y-6">
+          {/* Section Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-slate-800/80 flex items-center justify-center border border-slate-700">
+                <Zap className="w-4 h-4 text-amber-400" />
               </div>
-              <div className="flex items-center gap-3">
+              <h3 className="text-sm font-semibold text-slate-300">
+                Your Characters
+              </h3>
+            </div>
+            <div className="flex items-center gap-3">
+              {ownedCharacters.length > 0 && (
                 <span className="text-xs text-slate-500 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">
                   {ownedCharacters.length} total
                 </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setIsAddModalOpen(true)}
-                  className="h-8 px-3 text-xs border-violet-500/30 text-violet-400 hover:bg-violet-500/10 hover:text-violet-300"
-                >
-                  <Plus className="w-3.5 h-3.5 mr-1.5" />
-                  Add
-                </Button>
-              </div>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsAddModalOpen(true)}
+                className="h-8 px-3 text-xs border-violet-500/30 text-violet-400 hover:bg-violet-500/10 hover:text-violet-300"
+              >
+                <Plus className="w-3.5 h-3.5 mr-1.5" />
+                Add
+              </Button>
             </div>
+          </div>
 
-            {/* Character Grid */}
-            <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
-              {ownedCharacters.map((character, index) => {
-                return (
-                  <div
-                    key={character.id}
-                    className="flex flex-col items-center gap-1.5 group animate-scale-in relative"
-                    style={{ animationDelay: `${index * 30}ms` }}
-                  >
-                    {/* Character Icon */}
-                    <div
-                      className={cn(
-                        'w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-lg relative',
-                        elementBorderColors[character.element],
-                        'group-hover:scale-110 group-hover:shadow-xl'
-                      )}
-                    >
-                      <img
-                        src={character.iconUrl}
-                        alt={character.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
-                          if (fallback) {
-                            fallback.style.display = 'flex';
-                          }
-                        }}
-                      />
-                      <div
-                        className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-sm hidden"
-                      >
-                        {character.name.charAt(0)}
-                      </div>
-
-                      {/* Hover Actions - All characters are editable and removable */}
-                      <div className="absolute inset-0 bg-slate-900/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-1">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditingCharacter(character);
-                            setIsEditModalOpen(true);
-                          }}
-                          className="w-6 h-6 rounded-full bg-violet-500/80 hover:bg-violet-500 flex items-center justify-center text-white transition-colors"
-                          title="Edit character"
-                        >
-                          <Pencil className="w-3 h-3" />
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeCharacter(character.id);
-                          }}
-                          className="w-6 h-6 rounded-full bg-rose-500/80 hover:bg-rose-500 flex items-center justify-center text-white transition-colors"
-                          title="Remove character"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Character Name */}
-                    <span className="text-[10px] text-slate-500 truncate w-full text-center group-hover:text-slate-300 transition-colors">
-                      {character.name}
-                    </span>
-
-                    {/* Level & Constellation */}
-                    <div className="flex items-center gap-1">
-                      <span className="text-[9px] text-slate-600">
-                        Lv.{character.level}
-                      </span>
-                      {character.constellation > 0 && (
-                        <span className="text-[9px] text-amber-400">
-                          C{character.constellation}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Element Filter Visualization */}
-            <div className="pt-4 border-t border-white/5">
-              <p className="text-xs text-slate-500 mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                Characters by Element
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {elementOrder.map((element) => {
-                  const count = charactersByElement[element]?.length || 0;
-                  if (count === 0) return null;
+          {ownedCharacters.length > 0 && (
+            <>
+              {/* Character Grid */}
+              <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
+                {ownedCharacters.map((character, index) => {
                   return (
                     <div
-                      key={element}
-                      className={cn(
-                        'flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs transition-all duration-300 hover:scale-105 cursor-default',
-                        elementBgColors[element],
-                        elementBorderColors[element].split(' ')[0]
-                      )}
+                      key={character.id}
+                      className="flex flex-col items-center gap-1.5 group animate-scale-in relative"
+                      style={{ animationDelay: `${index * 30}ms` }}
                     >
-                      <span className="capitalize font-medium text-slate-200">
-                        {element}
+                      {/* Character Icon */}
+                      <div
+                        className={cn(
+                          'w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-lg relative',
+                          elementBorderColors[character.element],
+                          'group-hover:scale-110 group-hover:shadow-xl'
+                        )}
+                      >
+                        <img
+                          src={character.iconUrl}
+                          alt={character.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
+                            if (fallback) {
+                              fallback.style.display = 'flex';
+                            }
+                          }}
+                        />
+                        <div
+                          className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-sm hidden"
+                        >
+                          {character.name.charAt(0)}
+                        </div>
+
+                        {/* Hover Actions - All characters are editable and removable */}
+                        <div className="absolute inset-0 bg-slate-900/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-1">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditingCharacter(character);
+                              setIsEditModalOpen(true);
+                            }}
+                            className="w-6 h-6 rounded-full bg-violet-500/80 hover:bg-violet-500 flex items-center justify-center text-white transition-colors"
+                            title="Edit character"
+                          >
+                            <Pencil className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeCharacter(character.id);
+                            }}
+                            className="w-6 h-6 rounded-full bg-rose-500/80 hover:bg-rose-500 flex items-center justify-center text-white transition-colors"
+                            title="Remove character"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Character Name */}
+                      <span className="text-[10px] text-slate-500 truncate w-full text-center group-hover:text-slate-300 transition-colors">
+                        {character.name}
                       </span>
-                      <span className="text-slate-400 bg-slate-900/50 px-1.5 py-0.5 rounded-full min-w-[1.25rem] text-center">
-                        {count}
-                      </span>
+
+                      {/* Level & Constellation */}
+                      <div className="flex items-center gap-1">
+                        <span className="text-[9px] text-slate-600">
+                          Lv.{character.level}
+                        </span>
+                        {character.constellation > 0 && (
+                          <span className="text-[9px] text-amber-400">
+                            C{character.constellation}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
               </div>
-            </div>
-          </div>
-        )}
+
+              {/* Element Filter Visualization */}
+              <div className="pt-4 border-t border-white/5">
+                <p className="text-xs text-slate-500 mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+                  Characters by Element
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {elementOrder.map((element) => {
+                    const count = charactersByElement[element]?.length || 0;
+                    if (count === 0) return null;
+                    return (
+                      <div
+                        key={element}
+                        className={cn(
+                          'flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs transition-all duration-300 hover:scale-105 cursor-default',
+                          elementBgColors[element],
+                          elementBorderColors[element].split(' ')[0]
+                        )}
+                      >
+                        <span className="capitalize font-medium text-slate-200">
+                          {element}
+                        </span>
+                        <span className="text-slate-400 bg-slate-900/50 px-1.5 py-0.5 rounded-full min-w-[1.25rem] text-center">
+                          {count}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Add Character Modal */}
