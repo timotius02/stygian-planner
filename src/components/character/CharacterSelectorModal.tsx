@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, UserCheck, Filter } from 'lucide-react';
+import { Search, UserCheck, Filter, Sparkles, X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -18,14 +18,14 @@ interface CharacterSelectorModalProps {
   onSelect: (characterId: string) => void;
 }
 
-const elementFilters: { element: ElementType; label: string; gradient: string; glow: string }[] = [
-  { element: 'pyro', label: 'Pyro', gradient: 'from-red-500 to-orange-600', glow: 'shadow-red-500/30' },
-  { element: 'hydro', label: 'Hydro', gradient: 'from-blue-500 to-cyan-600', glow: 'shadow-blue-500/30' },
-  { element: 'electro', label: 'Electro', gradient: 'from-purple-500 to-fuchsia-600', glow: 'shadow-purple-500/30' },
-  { element: 'cryo', label: 'Cryo', gradient: 'from-cyan-400 to-blue-500', glow: 'shadow-cyan-400/30' },
-  { element: 'dendro', label: 'Dendro', gradient: 'from-green-500 to-emerald-600', glow: 'shadow-green-500/30' },
-  { element: 'anemo', label: 'Anemo', gradient: 'from-teal-400 to-cyan-500', glow: 'shadow-teal-400/30' },
-  { element: 'geo', label: 'Geo', gradient: 'from-yellow-500 to-amber-600', glow: 'shadow-yellow-500/30' },
+const elementFilters: { element: ElementType; label: string; gradient: string; glow: string; icon: string }[] = [
+  { element: 'pyro', label: 'Pyro', gradient: 'from-red-500 to-orange-600', glow: 'shadow-red-500/40', icon: '🔥' },
+  { element: 'hydro', label: 'Hydro', gradient: 'from-blue-500 to-cyan-600', glow: 'shadow-blue-500/40', icon: '💧' },
+  { element: 'electro', label: 'Electro', gradient: 'from-purple-500 to-fuchsia-600', glow: 'shadow-purple-500/40', icon: '⚡' },
+  { element: 'cryo', label: 'Cryo', gradient: 'from-cyan-400 to-blue-500', glow: 'shadow-cyan-400/40', icon: '❄️' },
+  { element: 'dendro', label: 'Dendro', gradient: 'from-green-500 to-emerald-600', glow: 'shadow-green-500/40', icon: '🌿' },
+  { element: 'anemo', label: 'Anemo', gradient: 'from-teal-400 to-cyan-500', glow: 'shadow-teal-400/40', icon: '🌪️' },
+  { element: 'geo', label: 'Geo', gradient: 'from-yellow-500 to-amber-600', glow: 'shadow-yellow-500/40', icon: '🪨' },
 ];
 
 export function CharacterSelectorModal({
@@ -69,32 +69,52 @@ export function CharacterSelectorModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-3xl max-h-[85vh] overflow-hidden flex flex-col bg-[hsl(260_30%_8%)] border border-white/10 text-slate-100 shadow-2xl">
-        <DialogHeader className="pb-4 border-b border-white/10">
-          <DialogTitle className="text-xl font-bold text-gradient-mystic flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-violet-600/20 flex items-center justify-center border border-violet-500/30">
-              <UserCheck className="w-5 h-5 text-violet-400" />
-            </div>
-            Select Character
-          </DialogTitle>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col bg-[hsl(260_25%_8%)] border border-white/10 text-slate-100 shadow-2xl p-0 gap-0">
+        {/* Header */}
+        <DialogHeader className="p-6 pb-4 border-b border-white/10 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
+          <div className="flex items-center justify-between">
+            <DialogTitle className="text-xl font-bold text-gradient-mystic flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-violet-500/30 rounded-xl blur-md" />
+                <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-800/30 flex items-center justify-center border border-violet-500/40">
+                  <UserCheck className="w-6 h-6 text-violet-400" />
+                </div>
+              </div>
+              <div>
+                <span className="block">Select Character</span>
+                <span className="text-xs font-normal text-slate-400">
+                  {ownedCharacters.length} characters available
+                </span>
+              </div>
+            </DialogTitle>
+          </div>
         </DialogHeader>
 
         {/* Search and Filter */}
-        <div className="space-y-4 mt-4">
+        <div className="p-6 pb-4 space-y-5 border-b border-white/5">
+          {/* Search Input */}
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
             <Input
               placeholder="Search characters..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="input-genshin pl-11 h-11"
+              className="input-genshin pl-12 h-12 text-base"
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-700/50 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-600/50 transition-colors"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
           {/* Element Filters */}
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <Filter className="w-3.5 h-3.5" />
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Filter className="w-4 h-4" />
               <span>Filter by Element</span>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -103,12 +123,13 @@ export function CharacterSelectorModal({
                 size="sm"
                 onClick={() => setSelectedElement(null)}
                 className={cn(
-                  'rounded-full px-4 transition-all duration-200',
+                  'rounded-full px-4 h-9 transition-all duration-300',
                   selectedElement === null
-                    ? 'bg-violet-600 hover:bg-violet-700 text-white shadow-lg shadow-violet-600/20'
-                    : 'border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    ? 'bg-violet-600 hover:bg-violet-700 text-white shadow-lg shadow-violet-600/25'
+                    : 'border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200 hover:border-slate-600'
                 )}
               >
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                 All
               </Button>
               {elementFilters.map(({ element, label, gradient, glow }) => (
@@ -118,10 +139,10 @@ export function CharacterSelectorModal({
                   size="sm"
                   onClick={() => setSelectedElement(element)}
                   className={cn(
-                    'rounded-full px-4 transition-all duration-200',
+                    'rounded-full px-4 h-9 transition-all duration-300',
                     selectedElement === element
                       ? cn('bg-gradient-to-r text-white shadow-lg', gradient, glow)
-                      : 'border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                      : 'border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200 hover:border-slate-600'
                   )}
                 >
                   <span className={cn(
@@ -136,36 +157,53 @@ export function CharacterSelectorModal({
         </div>
 
         {/* Character Grid */}
-        <div className="flex-1 overflow-y-auto mt-4 -mx-6 px-6 py-2">
+        <div className="flex-1 overflow-y-auto p-6">
           {filteredCharacters.length === 0 ? (
-            <div className="text-center py-12 text-slate-500">
+            <div className="text-center py-16">
               {ownedCharacters.length === 0 ? (
-                <div className="space-y-3">
-                  <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto">
-                    <UserCheck className="w-8 h-8 text-slate-600" />
+                <div className="space-y-4">
+                  <div className="relative w-20 h-20 mx-auto">
+                    <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-xl" />
+                    <div className="relative w-full h-full rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center">
+                      <UserCheck className="w-10 h-10 text-slate-600" />
+                    </div>
                   </div>
-                  <p className="text-lg font-medium">No characters found</p>
-                  <p className="text-sm text-slate-600 max-w-xs mx-auto">
-                    Enter your UID to load your characters from Enka Network
-                  </p>
+                  <div>
+                    <p className="text-lg font-medium text-slate-300">No characters found</p>
+                    <p className="text-sm text-slate-500 max-w-xs mx-auto mt-2">
+                      Enter your UID to load your characters from Enka Network
+                    </p>
+                  </div>
                 </div>
               ) : (
-                <div className="space-y-2">
-                  <p className="text-lg">No characters match your filters</p>
-                  <p className="text-sm text-slate-600">
+                <div className="space-y-3">
+                  <div className="w-16 h-16 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto">
+                    <Search className="w-8 h-8 text-slate-600" />
+                  </div>
+                  <p className="text-lg text-slate-300">No characters match your filters</p>
+                  <p className="text-sm text-slate-500">
                     Try adjusting your search or filter criteria
                   </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => { setSearchQuery(''); setSelectedElement(null); }}
+                    className="mt-4 border-slate-700 text-slate-400 hover:bg-slate-800"
+                  >
+                    Clear Filters
+                  </Button>
                 </div>
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-3">
-              {filteredCharacters.map((character) => (
+            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-4">
+              {filteredCharacters.map((character, index) => (
                 <CharacterGridItem
                   key={character.id}
                   character={character}
                   isAssigned={isCharacterAssigned(character.id)}
                   onClick={() => handleSelect(character.id)}
+                  index={index}
                 />
               ))}
             </div>
@@ -173,14 +211,15 @@ export function CharacterSelectorModal({
         </div>
 
         {/* Footer Stats */}
-        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-500">
-          <span>
-            {filteredCharacters.length} of {ownedCharacters.length} characters
+        <div className="p-4 border-t border-white/10 bg-slate-900/50 flex items-center justify-between text-sm">
+          <span className="text-slate-500">
+            Showing <span className="text-slate-300 font-medium">{filteredCharacters.length}</span> of{' '}
+            <span className="text-slate-300 font-medium">{ownedCharacters.length}</span> characters
           </span>
           {selectedElement && (
             <button
               onClick={() => setSelectedElement(null)}
-              className="text-violet-400 hover:text-violet-300 transition-colors"
+              className="text-violet-400 hover:text-violet-300 transition-colors text-sm font-medium"
             >
               Clear filter
             </button>
@@ -195,90 +234,115 @@ interface CharacterGridItemProps {
   character: OwnedCharacter;
   isAssigned: boolean;
   onClick: () => void;
+  index: number;
 }
 
 const elementBorderColors: Record<ElementType, string> = {
-  pyro: 'border-red-400/70 hover:border-red-400 shadow-red-500/10 hover:shadow-red-500/20',
-  hydro: 'border-blue-400/70 hover:border-blue-400 shadow-blue-500/10 hover:shadow-blue-500/20',
-  electro: 'border-purple-400/70 hover:border-purple-400 shadow-purple-500/10 hover:shadow-purple-500/20',
-  cryo: 'border-cyan-300/70 hover:border-cyan-300 shadow-cyan-400/10 hover:shadow-cyan-400/20',
-  dendro: 'border-green-400/70 hover:border-green-400 shadow-green-500/10 hover:shadow-green-500/20',
-  anemo: 'border-teal-300/70 hover:border-teal-300 shadow-teal-400/10 hover:shadow-teal-400/20',
-  geo: 'border-yellow-400/70 hover:border-yellow-400 shadow-yellow-500/10 hover:shadow-yellow-500/20',
+  pyro: 'border-red-400/70 hover:border-red-400 shadow-red-500/20 hover:shadow-red-500/40',
+  hydro: 'border-blue-400/70 hover:border-blue-400 shadow-blue-500/20 hover:shadow-blue-500/40',
+  electro: 'border-purple-400/70 hover:border-purple-400 shadow-purple-500/20 hover:shadow-purple-500/40',
+  cryo: 'border-cyan-300/70 hover:border-cyan-300 shadow-cyan-400/20 hover:shadow-cyan-400/40',
+  dendro: 'border-green-400/70 hover:border-green-400 shadow-green-500/20 hover:shadow-green-500/40',
+  anemo: 'border-teal-300/70 hover:border-teal-300 shadow-teal-400/20 hover:shadow-teal-400/40',
+  geo: 'border-yellow-400/70 hover:border-yellow-400 shadow-yellow-500/20 hover:shadow-yellow-500/40',
+};
+
+const elementBgColors: Record<ElementType, string> = {
+  pyro: 'bg-red-500/10',
+  hydro: 'bg-blue-500/10',
+  electro: 'bg-purple-500/10',
+  cryo: 'bg-cyan-400/10',
+  dendro: 'bg-green-500/10',
+  anemo: 'bg-teal-400/10',
+  geo: 'bg-yellow-500/10',
 };
 
 function CharacterGridItem({
   character,
   isAssigned,
   onClick,
+  index,
 }: CharacterGridItemProps) {
   return (
     <button
       onClick={onClick}
       disabled={isAssigned}
       className={cn(
-        'relative group flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-200',
+        'relative group flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-300 animate-scale-in',
         isAssigned
           ? 'opacity-40 cursor-not-allowed bg-slate-900/50'
-          : 'hover:bg-slate-800/50 cursor-pointer'
+          : 'hover:bg-slate-800/50 cursor-pointer hover:scale-105'
       )}
+      style={{ animationDelay: `${index * 20}ms` }}
     >
-      {/* Character Icon */}
+      {/* Character Icon Container */}
       <div
         className={cn(
-          'w-14 h-14 rounded-full overflow-hidden border-2 transition-all duration-200 shadow-lg',
+          'relative w-16 h-16 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-lg',
           elementBorderColors[character.element],
           !isAssigned && 'group-hover:scale-110 group-hover:shadow-xl'
         )}
       >
+        {/* Glow Effect */}
+        <div
+          className={cn(
+            'absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full blur-md',
+            elementBgColors[character.element]
+          )}
+        />
+
+        {/* Character Image */}
         <img
           src={character.iconUrl}
           alt={character.name}
-          className="w-full h-full object-cover"
+          className="relative w-full h-full object-cover"
           crossOrigin="anonymous"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             console.error(`Failed to load icon for ${character.name}:`, character.iconUrl);
             target.style.display = 'none';
-            // Show a fallback with the character's initial
             const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
             if (fallback) {
               fallback.style.display = 'flex';
             }
           }}
         />
+
+        {/* Fallback */}
         <div
           className="character-fallback w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 font-bold text-lg hidden"
         >
           {character.name.charAt(0)}
         </div>
+
+        {/* Constellation Badge */}
+        {character.constellation > 0 && (
+          <div className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-[8px] font-bold text-white">C{character.constellation}</span>
+          </div>
+        )}
       </div>
 
       {/* Character Name */}
       <span className={cn(
-        'text-xs text-center truncate w-full transition-colors',
+        'text-xs text-center truncate w-full transition-colors font-medium',
         isAssigned ? 'text-slate-600' : 'text-slate-300 group-hover:text-slate-100'
       )}>
         {character.name}
       </span>
 
       {/* Level Badge */}
-      <span className="text-[10px] text-slate-500 bg-slate-900/80 px-2 py-0.5 rounded-full">
+      <span className="text-[10px] text-slate-500 bg-slate-900/80 px-2 py-0.5 rounded-full border border-slate-800">
         Lv.{character.level}
       </span>
 
       {/* Assigned Indicator */}
       {isAssigned && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 rounded-xl">
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-900/90 px-2 py-1 rounded-full border border-slate-700">
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/60 rounded-xl backdrop-blur-[1px]">
+          <span className="text-[10px] font-medium text-slate-400 bg-slate-900/90 px-2.5 py-1 rounded-full border border-slate-700">
             Assigned
           </span>
         </div>
-      )}
-
-      {/* Hover Glow Effect */}
-      {!isAssigned && (
-        <div className="absolute inset-0 rounded-xl bg-violet-500/0 group-hover:bg-violet-500/5 transition-colors duration-200 -z-10" />
       )}
     </button>
   );

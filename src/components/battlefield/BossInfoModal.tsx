@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { ThumbsUp, ThumbsDown, Info, Lightbulb, Sword, Clock, Shield, Sparkles } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Lightbulb, Sword, Clock, Sparkles, Target, Skull, Zap } from 'lucide-react';
 import type { Boss } from '@/types/boss';
 
 interface BossInfoModalProps {
@@ -19,12 +19,16 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl bg-[hsl(260_30%_8%)] border border-white/10 text-slate-100 shadow-2xl">
-        <DialogHeader className="pb-4 border-b border-white/10">
+      <DialogContent className="max-w-2xl bg-[hsl(260_25%_8%)] border border-white/10 text-slate-100 shadow-2xl p-0 gap-0 overflow-hidden">
+        {/* Header with Boss Info */}
+        <DialogHeader className="p-6 pb-4 border-b border-white/10 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
           <div className="flex items-center gap-5">
             <div className="relative">
-              <div className="boss-avatar-ring">
-                <div className="w-20 h-20 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+              {/* Avatar Glow */}
+              <div className="absolute inset-0 bg-violet-500/30 rounded-full blur-xl" />
+
+              <div className="relative boss-avatar-ring">
+                <div className="w-24 h-24 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
                   <img
                     src={boss.iconUrl}
                     alt={boss.name}
@@ -35,21 +39,26 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
                   />
                 </div>
               </div>
-              <div className="absolute -bottom-1 -right-1 bg-violet-600 text-white text-xs font-bold px-2.5 py-1 rounded-full border-2 border-[hsl(260_30%_8%)] shadow-lg">
+
+              {/* Level Badge */}
+              <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-violet-600 to-purple-700 text-white text-sm font-bold px-3 py-1 rounded-full border-2 border-[hsl(260_25%_8%)] shadow-lg shadow-violet-600/30">
                 Lv. {boss.level}
               </div>
             </div>
+
             <div className="flex-1">
               <DialogTitle className="text-2xl font-bold text-gradient-mystic">
                 {boss.name}
               </DialogTitle>
-              <DialogDescription className="text-slate-400 mt-1">
+              <DialogDescription className="text-slate-400 mt-1 text-base">
                 {boss.subtitle}
               </DialogDescription>
-              <div className="mt-3 flex items-center gap-2">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+
+              {/* Battle Time */}
+              <div className="mt-4 flex items-center gap-3">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30">
                   <Clock className="w-4 h-4 text-amber-400" />
-                  <span className="text-amber-400 font-semibold text-sm">
+                  <span className="text-amber-400 font-bold">
                     Battle Time: {boss.battleTime}s
                   </span>
                 </div>
@@ -58,20 +67,23 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
           </div>
         </DialogHeader>
 
-        <div className="space-y-6 mt-4 max-h-[60vh] overflow-y-auto pr-2">
+        {/* Content */}
+        <div className="p-6 space-y-6 max-h-[60vh] overflow-y-auto">
           {/* Damage Types */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-violet-600/20 flex items-center justify-center">
-                <Sword className="w-4 h-4 text-violet-400" />
+            <h4 className="text-sm font-bold text-slate-200 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600/20 to-purple-600/20 flex items-center justify-center border border-violet-500/30">
+                <Sword className="w-5 h-5 text-violet-400" />
               </div>
               Damage Recommendations
             </h4>
 
             {boss.recommendedDamageTypes.length > 0 && (
-              <div className="space-y-2">
-                <p className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
-                  <ThumbsUp className="w-3.5 h-3.5" />
+              <div className="space-y-3">
+                <p className="text-xs text-emerald-400 font-semibold flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                    <ThumbsUp className="w-3.5 h-3.5" />
+                  </div>
                   Recommended
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -88,9 +100,11 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
             )}
 
             {boss.discouragedDamageTypes.length > 0 && (
-              <div className="space-y-2">
-                <p className="text-xs text-rose-400 font-medium flex items-center gap-1.5">
-                  <ThumbsDown className="w-3.5 h-3.5" />
+              <div className="space-y-3">
+                <p className="text-xs text-rose-400 font-semibold flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-lg bg-rose-500/20 flex items-center justify-center">
+                    <ThumbsDown className="w-3.5 h-3.5" />
+                  </div>
                   Not Recommended
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -107,12 +121,15 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
             )}
           </div>
 
+          {/* Divider */}
+          <div className="section-divider" />
+
           {/* Mechanics */}
           {boss.mechanics.length > 0 && (
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center">
-                  <Shield className="w-4 h-4 text-blue-400" />
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-slate-200 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600/20 to-cyan-600/20 flex items-center justify-center border border-blue-500/30">
+                  <Skull className="w-5 h-5 text-blue-400" />
                 </div>
                 Boss Mechanics
               </h4>
@@ -120,10 +137,10 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
                 {boss.mechanics.map((mechanic, index) => (
                   <div
                     key={index}
-                    className="genshin-card p-4"
+                    className="genshin-card p-4 group hover:border-blue-500/30 transition-colors"
                   >
-                    <h5 className="font-semibold text-violet-300 mb-1.5 flex items-center gap-2">
-                      <Info className="w-3.5 h-3.5" />
+                    <h5 className="font-bold text-blue-300 mb-2 flex items-center gap-2">
+                      <Zap className="w-4 h-4" />
                       {mechanic.title}
                     </h5>
                     <p className="text-sm text-slate-400 leading-relaxed">
@@ -135,30 +152,49 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
             </div>
           )}
 
+          {/* Divider */}
+          {boss.mechanics.length > 0 && boss.tips.length > 0 && (
+            <div className="section-divider" />
+          )}
+
           {/* Tips */}
           {boss.tips.length > 0 && (
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
-                  <Lightbulb className="w-4 h-4 text-amber-400" />
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-slate-200 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 flex items-center justify-center border border-amber-500/30">
+                  <Lightbulb className="w-5 h-5 text-amber-400" />
                 </div>
                 Strategy Tips
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {boss.tips.map((tip, index) => (
                   <li
                     key={index}
-                    className="flex items-start gap-3 text-sm text-slate-400"
+                    className="flex items-start gap-4 text-sm text-slate-400 group"
                   >
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center mt-0.5">
-                      <Sparkles className="w-3 h-3 text-amber-400" />
-                    </span>
-                    <span className="leading-relaxed">{tip}</span>
+                    <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center border border-amber-500/30 group-hover:border-amber-500/50 transition-colors">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <span className="leading-relaxed pt-1.5">{tip}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 border-t border-white/10 bg-slate-900/50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            <Target className="w-4 h-4" />
+            <span>Stygian Onslaught Event</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium transition-colors"
+          >
+            Close
+          </button>
         </div>
       </DialogContent>
     </Dialog>

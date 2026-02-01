@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { ThumbsUp, ThumbsDown, Info, Clock, Swords } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Info, Clock, Swords, Sparkles, Shield, Target } from 'lucide-react';
 import { BossInfoModal } from './BossInfoModal';
 import { TeamSlot } from '@/components/character/TeamSlot';
 import { CharacterSelectorModal } from '@/components/character/CharacterSelectorModal';
 import { useTeamStore } from '@/store/teamStore';
+
 import type { Boss } from '@/types/boss';
 
 interface BattlefieldCardProps {
@@ -45,99 +46,148 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
     removeCharacter(battlefieldId, position);
   };
 
+  const filledSlots = team?.slots.filter(s => s.characterId).length || 0;
+
   return (
     <>
-      <div className="genshin-card p-5 group">
+      <div className="genshin-card p-6 group relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
         {/* Header with Battlefield Number and Battle Time */}
-        <div className="flex items-start justify-between mb-5">
+        <div className="flex items-start justify-between mb-6 relative">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
-              <Swords className="w-4 h-4 text-violet-400" />
-              <span className="text-xs font-medium text-violet-400 uppercase tracking-wider">
-                Battlefield {battlefieldNumber}
-              </span>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/15 border border-violet-500/30">
+                <Swords className="w-3.5 h-3.5 text-violet-400" />
+                <span className="text-xs font-semibold text-violet-300 uppercase tracking-wider">
+                  Battlefield {battlefieldNumber}
+                </span>
+              </div>
+              {filledSlots > 0 && (
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30">
+                  <Shield className="w-3 h-3 text-emerald-400" />
+                  <span className="text-xs font-medium text-emerald-300">
+                    {filledSlots}/4
+                  </span>
+                </div>
+              )}
             </div>
-            <h3 className="text-lg font-semibold text-slate-100">
+            <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2 flex-wrap">
               {boss.name}
-              <span className="text-slate-500 font-normal"> : {boss.subtitle}</span>
+              <span className="text-slate-500 font-normal text-base">: {boss.subtitle}</span>
             </h3>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 shadow-lg shadow-amber-500/10">
             <Clock className="w-4 h-4 text-amber-400" />
-            <span className="text-amber-400 font-semibold text-sm">
+            <span className="text-amber-400 font-bold text-sm">
               {boss.battleTime}s
             </span>
           </div>
         </div>
 
-        <div className="flex gap-5">
+        <div className="flex flex-col sm:flex-row gap-6 relative">
           {/* Boss Avatar with Level Badge */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex flex-col items-center gap-3">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="relative group/avatar cursor-pointer transition-transform duration-200 hover:scale-105"
+              className="relative group/avatar cursor-pointer transition-transform duration-300 hover:scale-105"
             >
-              <div className="boss-avatar-ring">
-                <div className="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-violet-500/30 rounded-full blur-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative boss-avatar-ring">
+                <div className="w-20 h-20 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
                   <img
                     src={boss.iconUrl}
                     alt={boss.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover/avatar:scale-110"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
-                  <div className="w-full h-full flex items-center justify-center text-violet-400 text-lg font-bold">
+                  <div className="absolute inset-0 flex items-center justify-center text-violet-400 text-2xl font-bold bg-slate-900">
                     {boss.name.charAt(0)}
                   </div>
                 </div>
               </div>
+
               {/* Level Badge */}
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-slate-900 border border-violet-500/50 text-violet-300 text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gradient-to-r from-violet-600 to-purple-700 border border-violet-400/50 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-violet-600/30">
                 Lv. {boss.level}
               </div>
+
               {/* Info Icon on Hover */}
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-violet-600 rounded-full flex items-center justify-center opacity-0 group-hover/avatar:opacity-100 transition-all duration-200 shadow-lg shadow-violet-600/30">
-                <Info className="w-3 h-3 text-white" />
+              <div className="absolute -top-1 -right-1 w-7 h-7 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center opacity-0 group-hover/avatar:opacity-100 transition-all duration-300 shadow-lg shadow-violet-600/40 scale-90 group-hover/avatar:scale-100">
+                <Info className="w-3.5 h-3.5 text-white" />
               </div>
+            </button>
+
+            {/* Boss Info Button */}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="text-xs text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-violet-500/10"
+            >
+              <Target className="w-3.5 h-3.5" />
+              View Details
             </button>
           </div>
 
           {/* Boss Info and Team Slots */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-5">
             {/* Damage Type Badges */}
-            <div className="flex flex-wrap gap-2">
-              {boss.recommendedDamageTypes.map((damageType, index) => (
-                <span
-                  key={`rec-${index}`}
-                  className="badge-recommended"
-                >
-                  <ThumbsUp className="w-3 h-3" />
-                  {damageType.label}
-                </span>
-              ))}
-              {boss.discouragedDamageTypes.map((damageType, index) => (
-                <span
-                  key={`disc-${index}`}
-                  className="badge-discouraged"
-                >
-                  <ThumbsDown className="w-3 h-3" />
-                  {damageType.label}
-                </span>
-              ))}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Damage Recommendations</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {boss.recommendedDamageTypes.map((damageType, index) => (
+                  <span
+                    key={`rec-${index}`}
+                    className="badge-recommended"
+                  >
+                    <ThumbsUp className="w-3 h-3" />
+                    {damageType.label}
+                  </span>
+                ))}
+                {boss.discouragedDamageTypes.map((damageType, index) => (
+                  <span
+                    key={`disc-${index}`}
+                    className="badge-discouraged"
+                  >
+                    <ThumbsDown className="w-3 h-3" />
+                    {damageType.label}
+                  </span>
+                ))}
+              </div>
             </div>
 
+            {/* Divider */}
+            <div className="section-divider" />
+
             {/* Team Slots */}
-            <div className="flex gap-3 pt-1">
-              {[0, 1, 2, 3].map((slotIndex) => (
-                <TeamSlot
-                  key={slotIndex}
-                  character={getCharacterForSlot(slotIndex)}
-                  onClick={() => handleSlotClick(slotIndex)}
-                  onRemove={() => handleRemoveCharacter(slotIndex)}
-                  size="md"
-                />
-              ))}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-slate-500 flex items-center gap-2">
+                  <Shield className="w-3.5 h-3.5" />
+                  Team Composition
+                </span>
+                <span className="text-xs text-slate-500">
+                  Click to assign characters
+                </span>
+              </div>
+              <div className="flex gap-4 justify-center sm:justify-start">
+                {[0, 1, 2, 3].map((slotIndex) => (
+                  <TeamSlot
+                    key={slotIndex}
+                    character={getCharacterForSlot(slotIndex)}
+                    onClick={() => handleSlotClick(slotIndex)}
+                    onRemove={() => handleRemoveCharacter(slotIndex)}
+                    size="md"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

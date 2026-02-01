@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    /* Genshin Impact Inspired Dark Theme */
-    --background: 260 30% 8%;
+    /* Genshin Impact Inspired Dark Theme - Refined */
+    --background: 260 30% 6%;
     --foreground: 260 20% 95%;
-    --card: 260 25% 12%;
+    --card: 260 25% 10%;
     --card-foreground: 260 20% 95%;
-    --popover: 260 25% 10%;
+    --popover: 260 25% 8%;
     --popover-foreground: 260 20% 95%;
     --primary: 265 60% 55%;
     --primary-foreground: 260 20% 98%;
-    --secondary: 260 20% 18%;
+    --secondary: 260 20% 15%;
     --secondary-foreground: 260 20% 95%;
-    --muted: 260 20% 20%;
-    --muted-foreground: 260 15% 60%;
+    --muted: 260 20% 18%;
+    --muted-foreground: 260 15% 55%;
     --accent: 45 90% 55%;
     --accent-foreground: 260 30% 10%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 260 20% 20%;
-    --input: 260 20% 18%;
+    --border: 260 20% 18%;
+    --input: 260 20% 15%;
     --ring: 265 60% 55%;
     --chart-1: 265 60% 55%;
     --chart-2: 45 90% 55%;
@@ -33,7 +33,7 @@
     --chart-5: 0 70% 50%;
     --radius: 0.75rem;
 
-    /* Genshin Element Colors */
+    /* Genshin Element Colors - Vibrant */
     --element-pyro: 15 85% 55%;
     --element-hydro: 210 85% 55%;
     --element-electro: 270 70% 60%;
@@ -48,33 +48,38 @@
     --genshin-gold-dark: 45 80% 45%;
 
     /* Dark Fantasy Theme */
-    --stygian-purple: 260 40% 15%;
-    --stygian-purple-light: 265 35% 25%;
-    --stygian-purple-dark: 260 45% 8%;
-    --void-black: 260 30% 5%;
+    --stygian-purple: 260 40% 12%;
+    --stygian-purple-light: 265 35% 20%;
+    --stygian-purple-dark: 260 45% 6%;
+    --void-black: 260 30% 4%;
     --ethereal-blue: 220 60% 60%;
     --mystic-violet: 270 50% 55%;
+
+    /* Rarity Colors */
+    --rarity-5: 45 90% 55%;
+    --rarity-4: 270 50% 65%;
+    --rarity-3: 210 60% 55%;
   }
 
   .dark {
-    --background: 260 30% 8%;
+    --background: 260 30% 6%;
     --foreground: 260 20% 95%;
-    --card: 260 25% 12%;
+    --card: 260 25% 10%;
     --card-foreground: 260 20% 95%;
-    --popover: 260 25% 10%;
+    --popover: 260 25% 8%;
     --popover-foreground: 260 20% 95%;
     --primary: 265 60% 55%;
     --primary-foreground: 260 20% 98%;
-    --secondary: 260 20% 18%;
+    --secondary: 260 20% 15%;
     --secondary-foreground: 260 20% 95%;
-    --muted: 260 20% 20%;
-    --muted-foreground: 260 15% 60%;
+    --muted: 260 20% 18%;
+    --muted-foreground: 260 15% 55%;
     --accent: 45 90% 55%;
     --accent-foreground: 260 30% 10%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 260 20% 20%;
-    --input: 260 20% 18%;
+    --border: 260 20% 18%;
+    --input: 260 20% 15%;
     --ring: 265 60% 55%;
     --chart-1: 265 60% 55%;
     --chart-2: 45 90% 55%;
@@ -96,26 +101,33 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, hsl(260 40% 6%) 0%, hsl(260 35% 10%) 50%, hsl(270 30% 12%) 100%);
+    background:
+      radial-gradient(ellipse at 20% 0%, hsl(265 40% 15% / 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, hsl(280 40% 12% / 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsl(260 35% 8%) 0%, hsl(260 30% 5%) 100%);
     min-height: 100vh;
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', Georgia, serif;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
   }
 }
 
 @layer components {
-  /* Genshin-inspired Card Styles */
+  /* Genshin-inspired Card Styles - Enhanced */
   .genshin-card {
-    @apply relative overflow-hidden rounded-xl border border-white/10;
-    background: linear-gradient(145deg, hsl(260 25% 14%) 0%, hsl(260 30% 10%) 100%);
+    @apply relative overflow-hidden rounded-xl;
+    background: linear-gradient(145deg, hsl(260 25% 12% / 0.9) 0%, hsl(260 30% 8% / 0.95) 100%);
+    border: 1px solid hsl(260 20% 22%);
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 2px 4px -1px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      0 8px 32px -8px rgba(0, 0, 0, 0.4),
+      0 4px 16px -4px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .genshin-card::before {
@@ -125,156 +137,291 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  .genshin-card:hover {
+    border-color: hsl(265 40% 30%);
+    box-shadow:
+      0 12px 40px -8px rgba(0, 0, 0, 0.5),
+      0 6px 20px -4px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+      0 0 30px hsl(265 60% 50% / 0.1);
+    transform: translateY(-2px);
   }
 
   /* Gold Accent Border */
   .gold-border {
-    border: 1px solid hsl(45 90% 55% / 0.3);
+    border: 1px solid hsl(45 90% 55% / 0.4);
     box-shadow:
-      0 0 0 1px hsl(45 90% 55% / 0.1),
-      inset 0 0 20px hsl(45 90% 55% / 0.05);
+      0 0 0 1px hsl(45 90% 55% / 0.15),
+      inset 0 0 30px hsl(45 90% 55% / 0.08),
+      0 0 20px hsl(45 90% 55% / 0.15);
   }
 
   /* Mystic Glow Effect */
   .mystic-glow {
     box-shadow:
-      0 0 20px hsl(265 60% 55% / 0.3),
-      0 0 40px hsl(265 60% 55% / 0.1);
+      0 0 30px hsl(265 60% 55% / 0.4),
+      0 0 60px hsl(265 60% 55% / 0.2);
   }
 
-  /* Boss Avatar Ring */
+  /* Boss Avatar Ring - Enhanced */
   .boss-avatar-ring {
-    background: linear-gradient(145deg, hsl(265 60% 50%), hsl(280 50% 40%));
+    background: linear-gradient(145deg, hsl(265 60% 50%), hsl(280 50% 40%), hsl(265 60% 50%));
+    background-size: 200% 200%;
     padding: 3px;
     border-radius: 50%;
     box-shadow:
-      0 0 15px hsl(265 60% 50% / 0.4),
-      0 0 30px hsl(265 60% 50% / 0.2),
-      inset 0 0 10px hsl(265 60% 50% / 0.2);
+      0 0 20px hsl(265 60% 50% / 0.5),
+      0 0 40px hsl(265 60% 50% / 0.3),
+      inset 0 0 15px hsl(265 60% 50% / 0.3);
+    animation: gradient-shift 3s ease infinite;
   }
 
-  /* Element Color Borders */
-  .element-border-pyro { border-color: hsl(15 85% 55%); }
-  .element-border-hydro { border-color: hsl(210 85% 55%); }
-  .element-border-electro { border-color: hsl(270 70% 60%); }
-  .element-border-cryo { border-color: hsl(190 80% 65%); }
-  .element-border-dendro { border-color: hsl(120 60% 45%); }
-  .element-border-anemo { border-color: hsl(170 70% 55%); }
-  .element-border-geo { border-color: hsl(45 80% 55%); }
+  /* Element Color Borders - Enhanced */
+  .element-border-pyro {
+    border-color: hsl(15 85% 55%);
+    box-shadow: 0 0 15px hsl(15 85% 55% / 0.3);
+  }
+  .element-border-hydro {
+    border-color: hsl(210 85% 55%);
+    box-shadow: 0 0 15px hsl(210 85% 55% / 0.3);
+  }
+  .element-border-electro {
+    border-color: hsl(270 70% 60%);
+    box-shadow: 0 0 15px hsl(270 70% 60% / 0.3);
+  }
+  .element-border-cryo {
+    border-color: hsl(190 80% 65%);
+    box-shadow: 0 0 15px hsl(190 80% 65% / 0.3);
+  }
+  .element-border-dendro {
+    border-color: hsl(120 60% 45%);
+    box-shadow: 0 0 15px hsl(120 60% 45% / 0.3);
+  }
+  .element-border-anemo {
+    border-color: hsl(170 70% 55%);
+    box-shadow: 0 0 15px hsl(170 70% 55% / 0.3);
+  }
+  .element-border-geo {
+    border-color: hsl(45 80% 55%);
+    box-shadow: 0 0 15px hsl(45 80% 55% / 0.3);
+  }
 
-  /* Empty Slot Style */
+  /* Empty Slot Style - Enhanced */
   .empty-slot {
-    @apply rounded-full border-2 border-dashed border-white/20 bg-white/5;
-    transition: all 0.2s ease;
+    @apply rounded-full border-2 border-dashed;
+    border-color: hsl(260 20% 25%);
+    background: linear-gradient(145deg, hsl(260 25% 12% / 0.5), hsl(260 30% 8% / 0.5));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .empty-slot:hover {
-    border-color: hsl(265 60% 55% / 0.5);
-    background: hsl(265 60% 55% / 0.1);
+    border-color: hsl(265 60% 55% / 0.6);
+    background: linear-gradient(145deg, hsl(265 60% 30% / 0.15), hsl(265 60% 20% / 0.1));
+    box-shadow: 0 0 20px hsl(265 60% 55% / 0.2);
   }
 
-  /* Damage Type Badges */
+  /* Damage Type Badges - Enhanced */
   .badge-recommended {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
-    background: linear-gradient(145deg, hsl(150 60% 20%), hsl(150 50% 15%));
-    border: 1px solid hsl(150 60% 40% / 0.4);
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium;
+    background: linear-gradient(145deg, hsl(150 60% 18%), hsl(150 50% 12%));
+    border: 1px solid hsl(150 60% 40% / 0.5);
     color: hsl(150 70% 65%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
 
   .badge-discouraged {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
-    background: linear-gradient(145deg, hsl(0 60% 20%), hsl(0 50% 15%));
-    border: 1px solid hsl(0 60% 40% / 0.4);
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium;
+    background: linear-gradient(145deg, hsl(0 60% 18%), hsl(0 50% 12%));
+    border: 1px solid hsl(0 60% 40% / 0.5);
     color: hsl(0 70% 65%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
 
-  /* Button Styles */
+  /* Button Styles - Enhanced */
   .btn-genshin {
-    @apply relative overflow-hidden rounded-lg font-medium transition-all duration-200;
+    @apply relative overflow-hidden rounded-lg font-medium transition-all duration-300;
     background: linear-gradient(145deg, hsl(265 60% 50%), hsl(265 50% 45%));
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 0 0 1px hsl(265 60% 60% / 0.3),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      0 4px 12px -2px rgba(0, 0, 0, 0.4),
+      0 0 0 1px hsl(265 60% 60% / 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .btn-genshin::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
   }
 
   .btn-genshin:hover {
     background: linear-gradient(145deg, hsl(265 60% 55%), hsl(265 50% 50%));
     box-shadow:
-      0 6px 8px -1px rgba(0, 0, 0, 0.3),
-      0 0 0 1px hsl(265 60% 60% / 0.4),
-      0 0 20px hsl(265 60% 50% / 0.3),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
+      0 6px 16px -2px rgba(0, 0, 0, 0.4),
+      0 0 0 1px hsl(265 60% 60% / 0.5),
+      0 0 30px hsl(265 60% 50% / 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .btn-genshin:hover::before {
+    left: 100%;
   }
 
   .btn-genshin:active {
     transform: translateY(0);
     box-shadow:
-      0 2px 4px -1px rgba(0, 0, 0, 0.3),
-      0 0 0 1px hsl(265 60% 60% / 0.3),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      0 2px 8px -2px rgba(0, 0, 0, 0.4),
+      0 0 0 1px hsl(265 60% 60% / 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
   }
 
-  /* Input Styles */
+  /* Input Styles - Enhanced */
   .input-genshin {
-    @apply rounded-lg border bg-white/5 px-4 py-2.5 text-sm transition-all duration-200;
-    border-color: hsl(260 20% 25%);
+    @apply rounded-lg px-4 py-2.5 text-sm transition-all duration-300;
+    background: hsl(260 25% 10%);
+    border: 1px solid hsl(260 20% 22%);
     color: hsl(260 20% 95%);
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.2),
+      0 1px 0 0 rgba(255, 255, 255, 0.05);
   }
 
   .input-genshin:focus {
     outline: none;
     border-color: hsl(265 60% 55%);
-    box-shadow: 0 0 0 3px hsl(265 60% 55% / 0.15);
+    box-shadow:
+      0 0 0 3px hsl(265 60% 55% / 0.2),
+      inset 0 2px 4px rgba(0, 0, 0, 0.2),
+      0 0 20px hsl(265 60% 55% / 0.15);
     background: hsl(260 25% 12%);
   }
 
   .input-genshin::placeholder {
-    color: hsl(260 15% 45%);
+    color: hsl(260 15% 40%);
   }
 
   /* Modal Overlay */
   .modal-overlay {
     background: linear-gradient(135deg, hsl(260 40% 6% / 0.95) 0%, hsl(260 35% 10% / 0.95) 100%);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
   }
 
-  /* Scrollbar Styling */
+  /* Scrollbar Styling - Enhanced */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(260 30% 8%);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(260 20% 25%);
+    background: hsl(260 30% 6%);
     border-radius: 4px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(265 40% 40%);
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(265 40% 35%), hsl(265 40% 25%));
+    border-radius: 4px;
+    border: 2px solid hsl(260 30% 6%);
   }
 
-  /* Text Gradient */
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(265 50% 45%), hsl(265 50% 35%));
+  }
+
+  /* Text Gradients - Enhanced */
   .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(45 95% 65%) 0%, hsl(45 80% 50%) 50%, hsl(35 85% 55%) 100%);
+    background: linear-gradient(135deg, hsl(45 95% 70%) 0%, hsl(45 85% 55%) 30%, hsl(40 90% 50%) 60%, hsl(45 95% 65%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 30px hsl(45 90% 55% / 0.3);
   }
 
   .text-gradient-mystic {
-    background: linear-gradient(135deg, hsl(265 70% 70%) 0%, hsl(280 60% 60%) 50%, hsl(265 50% 55%) 100%);
+    background: linear-gradient(135deg, hsl(265 80% 75%) 0%, hsl(280 70% 65%) 30%, hsl(265 60% 60%) 60%, hsl(275 70% 70%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 30px hsl(265 60% 55% / 0.3);
+  }
+
+  .text-gradient-anemo {
+    background: linear-gradient(135deg, hsl(170 80% 65%) 0%, hsl(160 70% 55%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Character Card Styles */
+  .character-card {
+    @apply relative overflow-hidden rounded-xl;
+    background: linear-gradient(145deg, hsl(260 25% 14% / 0.8) 0%, hsl(260 30% 10% / 0.9) 100%);
+    border: 1px solid hsl(260 20% 22%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .character-card:hover {
+    border-color: hsl(265 40% 35%);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4), 0 0 30px hsl(265 60% 50% / 0.15);
+  }
+
+  /* Slot Container */
+  .slot-container {
+    @apply relative;
+  }
+
+  .slot-container::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 60%, hsl(265 60% 50% / 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .slot-container:hover::after {
+    opacity: 1;
+  }
+
+  /* Status Badge */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background: hsl(260 25% 15%);
+    border: 1px solid hsl(260 20% 25%);
+    color: hsl(260 15% 65%);
+  }
+
+  /* Section Divider */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(265 40% 30% / 0.5), transparent);
+  }
+
+  /* Glow Effects */
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Element Badge */
+  .element-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium;
+    background: hsl(260 25% 15%);
+    border: 1px solid hsl(260 20% 25%);
   }
 }
 
@@ -291,19 +438,92 @@
   .animate-shimmer {
     animation: shimmer 2s linear infinite;
   }
+
+  .animate-gradient {
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out forwards;
+  }
+
+  /* Backdrop blur utilities */
+  .backdrop-blur-genshin {
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* Glass effect */
+  .glass {
+    background: hsl(260 25% 12% / 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsl(260 20% 22% / 0.5);
+  }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(265 60% 55% / 0.3); }
-  50% { box-shadow: 0 0 30px hsl(265 60% 55% / 0.5); }
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(265 60% 55% / 0.3), 0 0 40px hsl(265 60% 55% / 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(265 60% 55% / 0.5), 0 0 60px hsl(265 60% 55% / 0.2);
+  }
 }
 
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px hsl(45 90% 55% / 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px hsl(45 90% 55% / 0.8));
+  }
 }
