@@ -88,25 +88,6 @@ function App() {
           <UIDInputSection />
         </div>
 
-        {/* Section Header */}
-        <div className="flex items-center justify-between pt-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-purple-800 rounded-xl blur-md opacity-40" />
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600/20 to-purple-800/20 flex items-center justify-center border border-violet-500/30">
-                <Sword className="w-5 h-5 text-violet-400" />
-              </div>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-slate-200">Party Setup</h2>
-              <p className="text-xs text-slate-500">Click slots to assign characters</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/50 border border-white/5">
-            <span className="text-xs text-slate-400">3 Battlefields</span>
-          </div>
-        </div>
-
         {/* Battlefield List */}
         <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <BattlefieldList />

@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { ThumbsUp, ThumbsDown, Lightbulb, Sword, Clock, Sparkles, Target, Skull, Zap } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Lightbulb, Sword, Sparkles, Target, Skull, Zap } from 'lucide-react';
 import type { Boss } from '@/types/boss';
 
 interface BossInfoModalProps {
@@ -54,15 +54,6 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
                 {boss.subtitle}
               </DialogDescription>
 
-              {/* Battle Time */}
-              <div className="mt-4 flex items-center gap-3">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30">
-                  <Clock className="w-4 h-4 text-amber-400" />
-                  <span className="text-amber-400 font-bold">
-                    Battle Time: {boss.battleTime}s
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </DialogHeader>

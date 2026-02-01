@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ThumbsUp, ThumbsDown, Info, Clock, Swords, Sparkles, Shield, Target } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Info, Swords, Sparkles, Shield, Target } from 'lucide-react';
 import { BossInfoModal } from './BossInfoModal';
 import { TeamSlot } from '@/components/character/TeamSlot';
 import { CharacterSelectorModal } from '@/components/character/CharacterSelectorModal';
@@ -54,7 +54,6 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
         {/* Background Decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-        {/* Header with Battlefield Number and Battle Time */}
         <div className="flex items-start justify-between mb-6 relative">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
@@ -77,12 +76,6 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
               {boss.name}
               <span className="text-slate-500 font-normal text-base">: {boss.subtitle}</span>
             </h3>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 shadow-lg shadow-amber-500/10">
-            <Clock className="w-4 h-4 text-amber-400" />
-            <span className="text-amber-400 font-bold text-sm">
-              {boss.battleTime}s
-            </span>
           </div>
         </div>
 
