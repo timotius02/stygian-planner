@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects and rewrites
+# Format: source destination [status]
+
+# API proxy for Enka Network
+# This proxies requests from /api/enka/* to https://enka.network/api/*
+/api/enka/* https://enka.network/api/:splat 200
+
+# Handle SPA routing - all routes should serve index.html
+/* /index.html 200

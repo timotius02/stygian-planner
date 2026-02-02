@@ -1,0 +1,29 @@
+# Cloudflare Pages configuration for Stygian Planner
+name = "stygian-planner"
+compatibility_date = "2024-01-01"
+
+# Build configuration
+[build]
+command = "npm run build"
+output_dir = "dist"
+
+# Environment variables (optional - can also be set in Cloudflare Dashboard)
+[env.production]
+# Add any production-specific env vars here
+
+[env.staging]
+# Add any staging-specific env vars here
+
+# Headers configuration for SPA routing
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+for = "/assets/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
