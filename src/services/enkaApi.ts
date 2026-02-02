@@ -3,7 +3,7 @@ import type { EnkaPlayerData, EnkaCharacterData } from '@/types/enka';
 import type { OwnedCharacter } from '@/types/character';
 import { AVATAR_ID_MAP, getCharacterById } from '@/data/characters';
 
-const ENKA_API_BASE = '/api/enka';
+const ENKA_API_BASE = 'https://enka.network/api';
 
 const apiClient = axios.create({
   baseURL: ENKA_API_BASE,
