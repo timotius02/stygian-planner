@@ -9,6 +9,10 @@ A beautiful, Genshin Impact-themed team planner for the Stygian Onslaught game m
 - 🔗 **Enka Network Integration**: Import your characters directly from your Genshin Impact UID
 - 🎮 **Team Planning**: Assign characters to each of the 10 battlefields
 - 📊 **Boss Information**: View detailed boss mechanics, recommended damage types, and strategy tips
+- ➕ **Manual Character Addition**: Add characters manually when they're not in your Enka profile
+- 📝 **Character Management**: Edit character levels and constellations, refresh data from Enka
+- 🧪 **Element & Weapon Filtering**: Filter characters by element and weapon type when adding
+- 💾 **Persistent Storage**: Your team compositions are saved locally
 - 🎨 **Genshin-Inspired UI**: Dark fantasy aesthetic with element-colored accents
 - 📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
 - ⚡ **Real-time Updates**: Characters update instantly when assigned or removed
@@ -57,25 +61,6 @@ npm run dev
 3. The character will be assigned to that battlefield
 4. Click the "×" button on a character to remove them from the slot
 5. Click on the boss avatar to view detailed boss information
-
-### Understanding Boss Information
-
-Each boss card displays:
-- **Boss Name & Subtitle**: The enemy you'll face
-- **Battle Time**: Time limit for defeating the boss
-- **Recommended Damage Types**: Damage types that work well against this boss (green badges)
-- **Not Recommended**: Damage types to avoid (red badges)
-- **Detailed Info**: Click the boss avatar to see mechanics and strategy tips
-
-## 🎨 Design Philosophy
-
-The app features a dark fantasy aesthetic inspired by Genshin Impact's Stygian Onslaught mode:
-
-- **Deep purples and violets** create a mysterious, ethereal atmosphere
-- **Gold accents** add a touch of premium quality
-- **Element colors** (Pyro red, Hydro blue, etc.) provide visual consistency with the game
-- **Glassmorphism effects** add depth and modern appeal
-- **Smooth animations** enhance the user experience
 
 ## 🛠️ Tech Stack
 
