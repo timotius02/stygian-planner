@@ -265,13 +265,12 @@ function CharacterGridItem({
 
         {/* Character Image */}
         <img
-          src={character.iconUrl}
+          src={character.image}
           alt={character.name}
           className="relative w-full h-full object-cover"
-          crossOrigin="anonymous"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            console.error(`Failed to load icon for ${character.name}:`, character.iconUrl);
+            console.error(`Failed to load image for ${character.name}:`, character.image);
             target.style.display = 'none';
             const fallback = target.parentElement?.querySelector('.character-fallback') as HTMLElement;
             if (fallback) {

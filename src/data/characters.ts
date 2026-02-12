@@ -1,14 +1,7 @@
 import type { Character } from '@/types/character';
 
-// CDN base URL for character icons (using Enka Network's CDN)
-const ENKA_CDN_BASE = 'https://enka.network/ui';
-
-// Helper function to build Enka icon URL
-function getEnkaIconUrl(iconName: string): string {
-  return `${ENKA_CDN_BASE}/${iconName}.png`;
-}
-
-// Static character metadata - all playable characters from Enka Network
+// Static character metadata - all playable characters
+// Images are served locally from /public/characters/
 // Last updated: 2026-02-12
 export const CHARACTERS: Character[] = [
   {
@@ -16,7 +9,7 @@ export const CHARACTERS: Character[] = [
     name: 'Albedo',
     element: 'geo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Albedo'),
+    image: '/characters/albedo.webp',
     rarity: 5,
   },
   {
@@ -24,7 +17,7 @@ export const CHARACTERS: Character[] = [
     name: 'Alhaitham',
     element: 'dendro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Alhatham'),
+    image: '/characters/alhaitham.webp',
     rarity: 5,
   },
   {
@@ -32,7 +25,7 @@ export const CHARACTERS: Character[] = [
     name: 'Aloy',
     element: 'cryo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Aloy'),
+    image: '/characters/aloy.webp',
     rarity: 5,
   },
   {
@@ -40,7 +33,7 @@ export const CHARACTERS: Character[] = [
     name: 'Amber',
     element: 'pyro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ambor'),
+    image: '/characters/amber.webp',
     rarity: 4,
   },
   {
@@ -48,7 +41,7 @@ export const CHARACTERS: Character[] = [
     name: 'Arataki Itto',
     element: 'geo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Itto'),
+    image: '/characters/itto.webp',
     rarity: 5,
   },
   {
@@ -56,7 +49,7 @@ export const CHARACTERS: Character[] = [
     name: 'Arlecchino',
     element: 'pyro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Arlecchino'),
+    image: '/characters/arlecchino.webp',
     rarity: 5,
   },
   {
@@ -64,7 +57,7 @@ export const CHARACTERS: Character[] = [
     name: 'Baizhu',
     element: 'dendro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Baizhuer'),
+    image: '/characters/baizhu.webp',
     rarity: 5,
   },
   {
@@ -72,7 +65,7 @@ export const CHARACTERS: Character[] = [
     name: 'Barbara',
     element: 'hydro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Barbara'),
+    image: '/characters/barbara.webp',
     rarity: 4,
   },
   {
@@ -80,7 +73,7 @@ export const CHARACTERS: Character[] = [
     name: 'Beidou',
     element: 'electro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Beidou'),
+    image: '/characters/beidou.webp',
     rarity: 4,
   },
   {
@@ -88,7 +81,7 @@ export const CHARACTERS: Character[] = [
     name: 'Bennett',
     element: 'pyro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Bennett'),
+    image: '/characters/bennett.webp',
     rarity: 4,
   },
   {
@@ -96,7 +89,7 @@ export const CHARACTERS: Character[] = [
     name: 'Candace',
     element: 'hydro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Candace'),
+    image: '/characters/candace.webp',
     rarity: 4,
   },
   {
@@ -104,7 +97,7 @@ export const CHARACTERS: Character[] = [
     name: 'Charlotte',
     element: 'cryo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Charlotte'),
+    image: '/characters/charlotte.webp',
     rarity: 4,
   },
   {
@@ -112,7 +105,7 @@ export const CHARACTERS: Character[] = [
     name: 'Chasca',
     element: 'anemo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Chasca'),
+    image: '/characters/chasca.webp',
     rarity: 5,
   },
   {
@@ -120,7 +113,7 @@ export const CHARACTERS: Character[] = [
     name: 'Chevreuse',
     element: 'pyro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Chevreuse'),
+    image: '/characters/chevreuse.webp',
     rarity: 4,
   },
   {
@@ -128,7 +121,7 @@ export const CHARACTERS: Character[] = [
     name: 'Chiori',
     element: 'geo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Chiori'),
+    image: '/characters/chiori.webp',
     rarity: 5,
   },
   {
@@ -136,7 +129,7 @@ export const CHARACTERS: Character[] = [
     name: 'Chongyun',
     element: 'cryo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Chongyun'),
+    image: '/characters/chongyun.webp',
     rarity: 4,
   },
   {
@@ -144,7 +137,7 @@ export const CHARACTERS: Character[] = [
     name: 'Citlali',
     element: 'cryo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Citlali'),
+    image: '/characters/citlali.webp',
     rarity: 5,
   },
   {
@@ -152,7 +145,7 @@ export const CHARACTERS: Character[] = [
     name: 'Clorinde',
     element: 'electro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Clorinde'),
+    image: '/characters/clorinde.webp',
     rarity: 5,
   },
   {
@@ -160,7 +153,7 @@ export const CHARACTERS: Character[] = [
     name: 'Collei',
     element: 'dendro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Collei'),
+    image: '/characters/collei.webp',
     rarity: 4,
   },
   {
@@ -168,7 +161,7 @@ export const CHARACTERS: Character[] = [
     name: 'Cyno',
     element: 'electro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Cyno'),
+    image: '/characters/cyno.webp',
     rarity: 5,
   },
   {
@@ -176,7 +169,7 @@ export const CHARACTERS: Character[] = [
     name: 'Dahlia',
     element: 'hydro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Dahlia'),
+    image: '/characters/dahlia.webp',
     rarity: 4,
   },
   {
@@ -184,7 +177,7 @@ export const CHARACTERS: Character[] = [
     name: 'Dehya',
     element: 'pyro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Dehya'),
+    image: '/characters/dehya.webp',
     rarity: 5,
   },
   {
@@ -192,7 +185,7 @@ export const CHARACTERS: Character[] = [
     name: 'Diluc',
     element: 'pyro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Diluc'),
+    image: '/characters/diluc.webp',
     rarity: 5,
   },
   {
@@ -200,7 +193,7 @@ export const CHARACTERS: Character[] = [
     name: 'Diona',
     element: 'cryo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Diona'),
+    image: '/characters/diona.webp',
     rarity: 4,
   },
   {
@@ -208,7 +201,7 @@ export const CHARACTERS: Character[] = [
     name: 'Dori',
     element: 'electro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Dori'),
+    image: '/characters/dori.webp',
     rarity: 4,
   },
   {
@@ -216,7 +209,7 @@ export const CHARACTERS: Character[] = [
     name: 'Emilie',
     element: 'dendro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Emilie'),
+    image: '/characters/emilie.webp',
     rarity: 5,
   },
   {
@@ -224,7 +217,7 @@ export const CHARACTERS: Character[] = [
     name: 'Escoffier',
     element: 'cryo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Escoffier'),
+    image: '/characters/escoffier.webp',
     rarity: 5,
   },
   {
@@ -232,7 +225,7 @@ export const CHARACTERS: Character[] = [
     name: 'Eula',
     element: 'cryo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Eula'),
+    image: '/characters/eula.webp',
     rarity: 5,
   },
   {
@@ -240,7 +233,7 @@ export const CHARACTERS: Character[] = [
     name: 'Faruzan',
     element: 'anemo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Faruzan'),
+    image: '/characters/faruzan.webp',
     rarity: 4,
   },
   {
@@ -248,7 +241,7 @@ export const CHARACTERS: Character[] = [
     name: 'Fischl',
     element: 'electro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Fischl'),
+    image: '/characters/fischl.webp',
     rarity: 4,
   },
   {
@@ -256,7 +249,7 @@ export const CHARACTERS: Character[] = [
     name: 'Freminet',
     element: 'cryo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Freminet'),
+    image: '/characters/freminet.webp',
     rarity: 4,
   },
   {
@@ -264,7 +257,7 @@ export const CHARACTERS: Character[] = [
     name: 'Furina',
     element: 'hydro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Furina'),
+    image: '/characters/furina.webp',
     rarity: 5,
   },
   {
@@ -272,7 +265,7 @@ export const CHARACTERS: Character[] = [
     name: 'Gaming',
     element: 'pyro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Gaming'),
+    image: '/characters/gaming.webp',
     rarity: 4,
   },
   {
@@ -280,7 +273,7 @@ export const CHARACTERS: Character[] = [
     name: 'Ganyu',
     element: 'cryo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ganyu'),
+    image: '/characters/ganyu.webp',
     rarity: 5,
   },
   {
@@ -288,7 +281,7 @@ export const CHARACTERS: Character[] = [
     name: 'Gorou',
     element: 'geo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Gorou'),
+    image: '/characters/gorou.webp',
     rarity: 4,
   },
   {
@@ -296,7 +289,7 @@ export const CHARACTERS: Character[] = [
     name: 'Hu Tao',
     element: 'pyro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Hutao'),
+    image: '/characters/hu-tao.webp',
     rarity: 5,
   },
   {
@@ -304,7 +297,7 @@ export const CHARACTERS: Character[] = [
     name: 'Iansan',
     element: 'electro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Iansan'),
+    image: '/characters/iansan.webp',
     rarity: 4,
   },
   {
@@ -312,7 +305,7 @@ export const CHARACTERS: Character[] = [
     name: 'Ifa',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ifa'),
+    image: '/characters/ifa.webp',
     rarity: 4,
   },
   {
@@ -320,7 +313,7 @@ export const CHARACTERS: Character[] = [
     name: 'Illuga',
     element: 'geo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Illuga'),
+    image: '/characters/illuga.webp',
     rarity: 4,
   },
   {
@@ -328,7 +321,7 @@ export const CHARACTERS: Character[] = [
     name: 'Jean',
     element: 'anemo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Qin'),
+    image: '/characters/jean.webp',
     rarity: 5,
   },
   {
@@ -336,7 +329,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kachina',
     element: 'geo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kachina'),
+    image: '/characters/kachina.webp',
     rarity: 4,
   },
   {
@@ -344,7 +337,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kaedehara Kazuha',
     element: 'anemo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kazuha'),
+    image: '/characters/kazuha.webp',
     rarity: 5,
   },
   {
@@ -352,7 +345,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kaeya',
     element: 'cryo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kaeya'),
+    image: '/characters/kaeya.webp',
     rarity: 4,
   },
   {
@@ -360,7 +353,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kamisato Ayaka',
     element: 'cryo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ayaka'),
+    image: '/characters/kamisato-ayaka.webp',
     rarity: 5,
   },
   {
@@ -368,7 +361,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kamisato Ayato',
     element: 'hydro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ayato'),
+    image: '/characters/ayato.webp',
     rarity: 5,
   },
   {
@@ -376,7 +369,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kaveh',
     element: 'dendro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kaveh'),
+    image: '/characters/kaveh.webp',
     rarity: 4,
   },
   {
@@ -384,7 +377,7 @@ export const CHARACTERS: Character[] = [
     name: 'Keqing',
     element: 'electro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Keqing'),
+    image: '/characters/keqing.webp',
     rarity: 5,
   },
   {
@@ -392,7 +385,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kinich',
     element: 'dendro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kinich'),
+    image: '/characters/kinich.webp',
     rarity: 5,
   },
   {
@@ -400,7 +393,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kirara',
     element: 'dendro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Momoka'),
+    image: '/characters/kirara.webp',
     rarity: 4,
   },
   {
@@ -408,7 +401,7 @@ export const CHARACTERS: Character[] = [
     name: 'Klee',
     element: 'pyro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Klee'),
+    image: '/characters/klee.webp',
     rarity: 5,
   },
   {
@@ -416,7 +409,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kujou Sara',
     element: 'electro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Sara'),
+    image: '/characters/sara.webp',
     rarity: 4,
   },
   {
@@ -424,7 +417,7 @@ export const CHARACTERS: Character[] = [
     name: 'Kuki Shinobu',
     element: 'electro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Shinobu'),
+    image: '/characters/kuki-shinobu.webp',
     rarity: 4,
   },
   {
@@ -432,7 +425,7 @@ export const CHARACTERS: Character[] = [
     name: 'Lan Yan',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Lanyan'),
+    image: '/characters/lan-yan.webp',
     rarity: 4,
   },
   {
@@ -440,7 +433,7 @@ export const CHARACTERS: Character[] = [
     name: 'Layla',
     element: 'cryo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Layla'),
+    image: '/characters/layla.webp',
     rarity: 4,
   },
   {
@@ -448,7 +441,7 @@ export const CHARACTERS: Character[] = [
     name: 'Lisa',
     element: 'electro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Lisa'),
+    image: '/characters/lisa.webp',
     rarity: 4,
   },
   {
@@ -456,7 +449,7 @@ export const CHARACTERS: Character[] = [
     name: 'Lynette',
     element: 'anemo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Linette'),
+    image: '/characters/lynette.webp',
     rarity: 4,
   },
   {
@@ -464,7 +457,7 @@ export const CHARACTERS: Character[] = [
     name: 'Lyney',
     element: 'pyro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Liney'),
+    image: '/characters/lyney.webp',
     rarity: 5,
   },
   {
@@ -472,7 +465,7 @@ export const CHARACTERS: Character[] = [
     name: 'Mavuika',
     element: 'pyro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Mavuika'),
+    image: '/characters/mavuika.webp',
     rarity: 5,
   },
   {
@@ -480,7 +473,7 @@ export const CHARACTERS: Character[] = [
     name: 'Mika',
     element: 'cryo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Mika'),
+    image: '/characters/mika.webp',
     rarity: 4,
   },
   {
@@ -488,7 +481,7 @@ export const CHARACTERS: Character[] = [
     name: 'Mona',
     element: 'hydro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Mona'),
+    image: '/characters/mona.webp',
     rarity: 5,
   },
   {
@@ -496,7 +489,7 @@ export const CHARACTERS: Character[] = [
     name: 'Mualani',
     element: 'hydro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Mualani'),
+    image: '/characters/mualani.webp',
     rarity: 5,
   },
   {
@@ -504,7 +497,7 @@ export const CHARACTERS: Character[] = [
     name: 'Nahida',
     element: 'dendro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Nahida'),
+    image: '/characters/nahida.webp',
     rarity: 5,
   },
   {
@@ -512,7 +505,7 @@ export const CHARACTERS: Character[] = [
     name: 'Navia',
     element: 'geo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Navia'),
+    image: '/characters/navia.webp',
     rarity: 5,
   },
   {
@@ -520,7 +513,7 @@ export const CHARACTERS: Character[] = [
     name: 'Neuvillette',
     element: 'hydro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Neuvillette'),
+    image: '/characters/neuvillette.webp',
     rarity: 5,
   },
   {
@@ -528,7 +521,7 @@ export const CHARACTERS: Character[] = [
     name: 'Nilou',
     element: 'hydro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Nilou'),
+    image: '/characters/nilou.webp',
     rarity: 5,
   },
   {
@@ -536,7 +529,7 @@ export const CHARACTERS: Character[] = [
     name: 'Ningguang',
     element: 'geo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Ningguang'),
+    image: '/characters/ningguang.webp',
     rarity: 4,
   },
   {
@@ -544,7 +537,7 @@ export const CHARACTERS: Character[] = [
     name: 'Noelle',
     element: 'geo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Noel'),
+    image: '/characters/noelle.webp',
     rarity: 4,
   },
   {
@@ -552,7 +545,7 @@ export const CHARACTERS: Character[] = [
     name: 'Ororon',
     element: 'electro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Olorun'),
+    image: '/characters/ororon.webp',
     rarity: 4,
   },
   {
@@ -560,7 +553,7 @@ export const CHARACTERS: Character[] = [
     name: 'Qiqi',
     element: 'cryo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Qiqi'),
+    image: '/characters/qiqi.webp',
     rarity: 5,
   },
   {
@@ -568,7 +561,7 @@ export const CHARACTERS: Character[] = [
     name: 'Raiden Shogun',
     element: 'electro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Shougun'),
+    image: '/characters/raiden-shogun.webp',
     rarity: 5,
   },
   {
@@ -576,7 +569,7 @@ export const CHARACTERS: Character[] = [
     name: 'Razor',
     element: 'electro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Razor'),
+    image: '/characters/razor.webp',
     rarity: 4,
   },
   {
@@ -584,7 +577,7 @@ export const CHARACTERS: Character[] = [
     name: 'Rosaria',
     element: 'cryo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Rosaria'),
+    image: '/characters/rosaria.webp',
     rarity: 4,
   },
   {
@@ -592,7 +585,7 @@ export const CHARACTERS: Character[] = [
     name: 'Sangonomiya Kokomi',
     element: 'hydro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Kokomi'),
+    image: '/characters/kokomi.webp',
     rarity: 5,
   },
   {
@@ -600,7 +593,7 @@ export const CHARACTERS: Character[] = [
     name: 'Sayu',
     element: 'anemo',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Sayu'),
+    image: '/characters/sayu.webp',
     rarity: 4,
   },
   {
@@ -608,7 +601,7 @@ export const CHARACTERS: Character[] = [
     name: 'Sethos',
     element: 'electro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Sethos'),
+    image: '/characters/sethos.webp',
     rarity: 4,
   },
   {
@@ -616,7 +609,7 @@ export const CHARACTERS: Character[] = [
     name: 'Shenhe',
     element: 'cryo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Shenhe'),
+    image: '/characters/shenhe.webp',
     rarity: 5,
   },
   {
@@ -624,7 +617,7 @@ export const CHARACTERS: Character[] = [
     name: 'Shikanoin Heizou',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Heizo'),
+    image: '/characters/heizou.webp',
     rarity: 4,
   },
   {
@@ -632,7 +625,7 @@ export const CHARACTERS: Character[] = [
     name: 'Sigewinne',
     element: 'hydro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Sigewinne'),
+    image: '/characters/sigewinne.webp',
     rarity: 5,
   },
   {
@@ -640,7 +633,7 @@ export const CHARACTERS: Character[] = [
     name: 'Skirk',
     element: 'cryo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_SkirkNew'),
+    image: '/characters/skirk.webp',
     rarity: 5,
   },
   {
@@ -648,7 +641,7 @@ export const CHARACTERS: Character[] = [
     name: 'Sucrose',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Sucrose'),
+    image: '/characters/sucrose.webp',
     rarity: 4,
   },
   {
@@ -656,7 +649,7 @@ export const CHARACTERS: Character[] = [
     name: 'Tartaglia',
     element: 'hydro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Tartaglia'),
+    image: '/characters/tartaglia.webp',
     rarity: 5,
   },
   {
@@ -664,7 +657,7 @@ export const CHARACTERS: Character[] = [
     name: 'Thoma',
     element: 'pyro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Tohma'),
+    image: '/characters/thoma.webp',
     rarity: 4,
   },
   {
@@ -672,7 +665,7 @@ export const CHARACTERS: Character[] = [
     name: 'Tighnari',
     element: 'dendro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Tighnari'),
+    image: '/characters/tighnari.webp',
     rarity: 5,
   },
   {
@@ -680,7 +673,7 @@ export const CHARACTERS: Character[] = [
     name: 'Traveler',
     element: 'anemo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_PlayerBoy'),
+    image: '/characters/traveler.webp',
     rarity: 5,
   },
   {
@@ -688,7 +681,7 @@ export const CHARACTERS: Character[] = [
     name: 'Varesa',
     element: 'electro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Varesa'),
+    image: '/characters/varesa.webp',
     rarity: 5,
   },
   {
@@ -696,7 +689,7 @@ export const CHARACTERS: Character[] = [
     name: 'Venti',
     element: 'anemo',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Venti'),
+    image: '/characters/venti.webp',
     rarity: 5,
   },
   {
@@ -704,7 +697,7 @@ export const CHARACTERS: Character[] = [
     name: 'Wanderer',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Wanderer'),
+    image: '/characters/wanderer.webp',
     rarity: 5,
   },
   {
@@ -712,7 +705,7 @@ export const CHARACTERS: Character[] = [
     name: 'Wriothesley',
     element: 'cryo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Wriothesley'),
+    image: '/characters/wriothesley.webp',
     rarity: 5,
   },
   {
@@ -720,7 +713,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xiangling',
     element: 'pyro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Xiangling'),
+    image: '/characters/xiangling.webp',
     rarity: 4,
   },
   {
@@ -728,7 +721,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xianyun',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Liuyun'),
+    image: '/characters/xianyun.webp',
     rarity: 5,
   },
   {
@@ -736,7 +729,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xiao',
     element: 'anemo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Xiao'),
+    image: '/characters/xiao.webp',
     rarity: 5,
   },
   {
@@ -744,7 +737,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xilonen',
     element: 'geo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Xilonen'),
+    image: '/characters/xilonen.webp',
     rarity: 5,
   },
   {
@@ -752,7 +745,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xingqiu',
     element: 'hydro',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Xingqiu'),
+    image: '/characters/xingqiu.webp',
     rarity: 4,
   },
   {
@@ -760,7 +753,7 @@ export const CHARACTERS: Character[] = [
     name: 'Xinyan',
     element: 'pyro',
     weaponType: 'claymore',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Xinyan'),
+    image: '/characters/xinyan.webp',
     rarity: 4,
   },
   {
@@ -768,7 +761,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yae Miko',
     element: 'electro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Yae'),
+    image: '/characters/yae-miko.webp',
     rarity: 5,
   },
   {
@@ -776,7 +769,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yanfei',
     element: 'pyro',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Feiyan'),
+    image: '/characters/yanfei.webp',
     rarity: 4,
   },
   {
@@ -784,7 +777,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yaoyao',
     element: 'dendro',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Yaoyao'),
+    image: '/characters/yaoyao.webp',
     rarity: 4,
   },
   {
@@ -792,7 +785,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yelan',
     element: 'hydro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Yelan'),
+    image: '/characters/yelan.webp',
     rarity: 5,
   },
   {
@@ -800,7 +793,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yoimiya',
     element: 'pyro',
     weaponType: 'bow',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Yoimiya'),
+    image: '/characters/yoimiya.webp',
     rarity: 5,
   },
   {
@@ -808,7 +801,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yumemizuki Mizuki',
     element: 'anemo',
     weaponType: 'catalyst',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Mizuki'),
+    image: '/characters/yumemizuki-mizuki.webp',
     rarity: 5,
   },
   {
@@ -816,7 +809,7 @@ export const CHARACTERS: Character[] = [
     name: 'Yun Jin',
     element: 'geo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Yunjin'),
+    image: '/characters/yun-jin.webp',
     rarity: 4,
   },
   {
@@ -824,7 +817,7 @@ export const CHARACTERS: Character[] = [
     name: 'Zhongli',
     element: 'geo',
     weaponType: 'polearm',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Zhongli'),
+    image: '/characters/zhongli.webp',
     rarity: 5,
   },
   {
@@ -832,7 +825,7 @@ export const CHARACTERS: Character[] = [
     name: 'Zibai',
     element: 'geo',
     weaponType: 'sword',
-    iconUrl: getEnkaIconUrl('UI_AvatarIcon_Zibai'),
+    image: '/characters/zibai.webp',
     rarity: 5,
   },
 ];
@@ -848,8 +841,8 @@ export function getCharacterById(id: string): Character | undefined {
   return CHARACTER_MAP[id];
 }
 
-// Helper function to get character icon URL by ID
-export function getCharacterIconUrl(id: string): string {
+// Helper function to get character image URL by ID
+export function getCharacterImageUrl(id: string): string {
   const character = CHARACTER_MAP[id];
-  return character?.iconUrl ?? '';
+  return character?.image ?? '';
 }

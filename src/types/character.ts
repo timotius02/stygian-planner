@@ -6,6 +6,6 @@ export interface Character {
   name: string;
   element: ElementType;
   weaponType: WeaponType;
-  iconUrl: string;
+  image: string;
   rarity: 4 | 5;
 }

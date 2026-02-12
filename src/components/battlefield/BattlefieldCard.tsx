@@ -94,7 +94,6 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
                     src={boss.iconUrl}
                     alt={boss.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover/avatar:scale-110"
-                    crossOrigin="anonymous"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';

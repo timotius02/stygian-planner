@@ -8,7 +8,7 @@ export const BOSSES: Boss[] = [
     name: 'Battle-Hardened Hexadecatonic Mandragora: Stormvine',
     subtitle: 'Agglomerated State',
     level: 105,
-    iconUrl: 'https://api.lunaris.moe/data/assets/leyline/UI_Img_LeyLineChallenge_MandragoraElite.png',
+    iconUrl: '/bosses/hexadecatonic-mandragora.webp',
     battleTime: 120,
     recommendedDamageTypes: [
       { type: 'elemental', label: 'Pyro DMG' },
@@ -48,7 +48,7 @@ export const BOSSES: Boss[] = [
     name: 'Knuckle Duckle: Armored Arsenal',
     subtitle: 'Heavy Duckstruction Mode',
     level: 105,
-    iconUrl: 'https://api.lunaris.moe/data/assets/leyline/UI_Img_LeyLineChallenge_Gastrobot01.png',
+    iconUrl: '/bosses/knuckle-duckle.webp',
     battleTime: 120,
     recommendedDamageTypes: [
       { type: 'reaction', label: 'Electro-Charged' },
@@ -83,7 +83,7 @@ export const BOSSES: Boss[] = [
     name: 'Secret Source Automaton: Overseer Device - Obliterator Panoply',
     subtitle: 'Sweeper Mode',
     level: 100,
-    iconUrl: 'https://api.lunaris.moe/data/assets/leyline/UI_Img_LeyLineChallenge_DragonCollar.png',
+    iconUrl: '/bosses/secret-source-automaton.webp',
     battleTime: 120,
     recommendedDamageTypes: [
       { type: 'elemental', label: 'Cryo DMG' },

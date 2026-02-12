@@ -34,9 +34,17 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
                     alt={boss.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/bosses/placeholder.png';
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = target.parentElement?.querySelector('.boss-fallback') as HTMLElement;
+                      if (fallback) {
+                        fallback.style.display = 'flex';
+                      }
                     }}
                   />
+                  <div className="boss-fallback w-full h-full absolute inset-0 items-center justify-center text-violet-400 text-3xl font-bold bg-slate-900 hidden">
+                    {boss.name.charAt(0)}
+                  </div>
                 </div>
               </div>
 
