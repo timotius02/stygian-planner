@@ -94,19 +94,20 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
                     src={boss.iconUrl}
                     alt={boss.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover/avatar:scale-110"
+                    crossOrigin="anonymous"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = target.parentElement?.querySelector('.boss-fallback') as HTMLElement;
+                      if (fallback) {
+                        fallback.style.display = 'flex';
+                      }
                     }}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center text-violet-400 text-2xl font-bold bg-slate-900">
+                  <div className="boss-fallback w-full h-full absolute inset-0 items-center justify-center text-violet-400 text-2xl font-bold bg-slate-900 hidden">
                     {boss.name.charAt(0)}
                   </div>
                 </div>
-              </div>
-
-              {/* Level Badge */}
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gradient-to-r from-violet-600 to-purple-700 border border-violet-400/50 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-violet-600/30">
-                Lv. {boss.level}
               </div>
 
               {/* Info Icon on Hover */}

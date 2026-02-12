@@ -71,12 +71,12 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
 
             {boss.recommendedDamageTypes.length > 0 && (
               <div className="space-y-3">
-                <p className="text-xs text-emerald-400 font-semibold flex items-center gap-2">
+                <div className="text-xs text-emerald-400 font-semibold flex items-center gap-2">
                   <div className="w-6 h-6 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                     <ThumbsUp className="w-3.5 h-3.5" />
                   </div>
                   Recommended
-                </p>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {boss.recommendedDamageTypes.map((damageType, index) => (
                     <span
@@ -92,12 +92,12 @@ export function BossInfoModal({ boss, isOpen, onClose }: BossInfoModalProps) {
 
             {boss.discouragedDamageTypes.length > 0 && (
               <div className="space-y-3">
-                <p className="text-xs text-rose-400 font-semibold flex items-center gap-2">
+                <div className="text-xs text-rose-400 font-semibold flex items-center gap-2">
                   <div className="w-6 h-6 rounded-lg bg-rose-500/20 flex items-center justify-center">
                     <ThumbsDown className="w-3.5 h-3.5" />
                   </div>
                   Not Recommended
-                </p>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {boss.discouragedDamageTypes.map((damageType, index) => (
                     <span
