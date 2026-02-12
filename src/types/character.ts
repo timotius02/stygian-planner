@@ -9,13 +9,3 @@ export interface Character {
   iconUrl: string;
   rarity: 4 | 5;
 }
-
-export interface OwnedCharacter extends Character {
-  level: number;
-  constellation: number;
-  talents: {
-    normalAttack: number;
-    elementalSkill: number;
-    elementalBurst: number;
-  };
-}

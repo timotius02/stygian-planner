@@ -4,7 +4,7 @@ import { BossInfoModal } from './BossInfoModal';
 import { TeamSlot } from '@/components/character/TeamSlot';
 import { CharacterSelectorModal } from '@/components/character/CharacterSelectorModal';
 import { useTeamStore } from '@/store/teamStore';
-
+import { CHARACTERS } from '@/data/characters';
 import type { Boss } from '@/types/boss';
 
 interface BattlefieldCardProps {
@@ -21,7 +21,6 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
     getBattlefieldTeam,
     assignCharacter,
     removeCharacterFromSlot,
-    ownedCharacters,
   } = useTeamStore();
 
   const battlefieldId = `battlefield-${battlefieldNumber}`;
@@ -30,7 +29,7 @@ export function BattlefieldCard({ boss, battlefieldNumber }: BattlefieldCardProp
   const getCharacterForSlot = (position: number) => {
     const slot = team?.slots.find((s) => s.position === position);
     if (!slot?.characterId) return null;
-    return ownedCharacters.find((c) => c.id === slot.characterId) || null;
+    return CHARACTERS.find((c) => c.id === slot.characterId) || null;
   };
 
   const handleSlotClick = (position: number) => {

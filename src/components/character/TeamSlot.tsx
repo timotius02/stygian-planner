@@ -1,13 +1,12 @@
 import { Plus, X, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { ElementType, OwnedCharacter } from '@/types';
+import type { ElementType, Character } from '@/types';
 
 interface TeamSlotProps {
-  character?: OwnedCharacter | null;
+  character?: Character | null;
   onClick: () => void;
   onRemove?: () => void;
   size?: 'sm' | 'md' | 'lg';
-  showConstellation?: boolean;
 }
 
 const elementGradients: Record<ElementType, string> = {
@@ -47,7 +46,6 @@ export function TeamSlot({
   onClick,
   onRemove,
   size = 'md',
-  showConstellation = true,
 }: TeamSlotProps) {
   const isEmpty = !character;
 
@@ -121,20 +119,6 @@ export function TeamSlot({
           </div>
         )}
       </button>
-
-      {/* Level Badge */}
-      {!isEmpty && (
-        <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg z-10 flex items-center gap-1">
-          <span>Lv.{character.level}</span>
-        </div>
-      )}
-
-      {/* Constellation Badge */}
-      {!isEmpty && showConstellation && character.constellation > 0 && (
-        <div className="absolute -top-1 -left-1 w-5 h-5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/30 z-10">
-          <span className="text-[9px] font-bold text-white">C{character.constellation}</span>
-        </div>
-      )}
 
       {/* Remove Button */}
       {!isEmpty && onRemove && (

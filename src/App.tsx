@@ -1,6 +1,5 @@
 import './App.css';
 import { BattlefieldList } from '@/components/battlefield/BattlefieldList';
-import { UIDInputSection } from '@/components/uid/UIDInputSection';
 import { Sparkles, Github, Heart, Sword, Shield, Flame } from 'lucide-react';
 
 function App() {
@@ -78,18 +77,13 @@ function App() {
             Plan Your <span className="text-gradient-mystic">Battle Teams</span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-base leading-relaxed">
-            Import your characters from Enka Network and strategically assign them to each battlefield.
+            Select any characters from the full roster and strategically assign them to each battlefield.
             Optimize your team composition for maximum efficiency against powerful bosses.
           </p>
         </section>
 
-        {/* UID Input Section */}
-        <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <UIDInputSection />
-        </div>
-
         {/* Battlefield List */}
-        <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <BattlefieldList />
         </div>
       </main>
@@ -102,17 +96,6 @@ function App() {
               <span>Made with</span>
               <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" />
               <span>for Genshin Impact players</span>
-            </div>
-            <div className="flex items-center gap-4 text-sm text-slate-500">
-              <span>Data provided by</span>
-              <a
-                href="https://enka.network/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-violet-400 hover:text-violet-300 transition-colors hover:underline"
-              >
-                Enka Network
-              </a>
             </div>
           </div>
           <div className="mt-4 pt-4 border-t border-white/5 text-center text-xs text-slate-600">
